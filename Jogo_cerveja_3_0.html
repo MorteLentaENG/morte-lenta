@@ -804,13 +804,11 @@
 
     <!-- TELA JOGO -->
     <div id="tela-jogo" class="tela">
-        <div style="text-align:right;margin-bottom:0.5rem;">
-          <button onclick="voltarMenu()" style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.4);background:transparent;border:1px solid rgba(255,255,255,0.1);padding:0.3rem 0.8rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">← Menu</button>
-        </div>
+
         <div class="hud">
             <div class="hud-item">
                 <div class="hud-label">Carta</div>
-                <div class="hud-value red"><span id="contador">0</span><span style="color:#333;font-size:0.7em">/10</span></div>
+                <div class="hud-value red"><span id="contador">0</span><span style="color:#333;font-size:0.7em">/30</span></div>
             </div>
             <div class="hud-item" style="flex:1;padding:0 16px">
                 <div class="progress-bar" style="margin:0">
@@ -850,7 +848,6 @@
             <div class="feedback-pill" id="feedback"></div>
         </div>
         <div style="display:flex;gap:0.75rem;justify-content:center;margin-top:0.5rem;">
-            <button onclick="voltarMenu()" style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.4);background:transparent;border:1px solid rgba(255,255,255,0.1);padding:0.35rem 1rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">← Menu</button>
             <a href="index.html" style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.4);text-decoration:none;border:1px solid rgba(255,255,255,0.1);padding:0.35rem 1rem;transition:all 0.2s;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">⬡ Voltar ao Site</a>
         </div>
     </div>
@@ -881,14 +878,34 @@
 <script>
     const atividades = [
         { texto: "Adição de 1.444 g de malte (Pilsen + Munich) na água aquecida.", categoria: "agrega" },
+        { texto: "Manutenção da temperatura entre 65°C e 68°C por 60 min para extração de açúcares.", categoria: "agrega" },
+        { texto: "Elevação da temperatura para 76°C nos últimos 15 minutos da mostura.", categoria: "agrega" },
         { texto: "Fervura do mosto por 60 minutos para esterilização.", categoria: "agrega" },
+        { texto: "Adição de 5 g de lúpulo Nugget no início da fervura (amargor).", categoria: "agrega" },
+        { texto: "Adição de 5 g de lúpulo Brewers Gold nos últimos 10 min (aroma).", categoria: "agrega" },
         { texto: "Adição da levedura Ale no mosto para iniciar a fermentação.", categoria: "agrega" },
         { texto: "Adição de 400 g de morango e 300 g de amora amassados no fermentador.", categoria: "agrega" },
+        { texto: "Adição de raspas e suco de 2 a 3 limões ao mosto fermentado.", categoria: "agrega" },
+        { texto: "Adição de açúcar (5 g por litro) antes do envase para gerar carbonatação.", categoria: "agrega" },
+        { texto: "Separação e pesagem prévia de todos os ingredientes.", categoria: "necessario" },
         { texto: "Aquecimento inicial de cerca de 10 litros de água até atingir 68°C.", categoria: "necessario" },
+        { texto: "Separação (coagem) do líquido (mosto) dos grãos de malte.", categoria: "necessario" },
+        { texto: "Lavagem dos grãos com água quente a cerca de 75°C.", categoria: "necessario" },
         { texto: "Resfriamento rápido do mosto fervido até aproximadamente 20°C.", categoria: "necessario" },
+        { texto: "Transferência do mosto resfriado da panela para o balde fermentador.", categoria: "necessario" },
+        { texto: "Fechamento do fermentador com o airlock.", categoria: "necessario" },
+        { texto: "Higienização rigorosa das frutas antes do preparo.", categoria: "necessario" },
         { texto: "Higienização de todos os equipamentos antes do uso.", categoria: "necessario" },
+        { texto: "Envase (engarrafamento) do líquido e fechamento das garrafas.", categoria: "necessario" },
         { texto: "Esquentar a água além dos 68°C por desatenção e esperar esfriar.", categoria: "desperdicio" },
+        { texto: "Procurar termômetro que foi guardado no lugar errado.", categoria: "desperdicio" },
+        { texto: "Derrubar parte do malte no chão e precisar limpar.", categoria: "desperdicio" },
+        { texto: "Demorar no resfriamento do mosto por não usar os equipamentos adequados.", categoria: "desperdicio" },
         { texto: "Interromper a mostura porque esqueceu de comprar os lúpulos.", categoria: "desperdicio" },
+        { texto: "Oxigenar o mosto acidentalmente ao agitar o balde de forma brusca.", categoria: "desperdicio" },
+        { texto: "Exagerar na quantidade de limão, descaracterizando a receita original.", categoria: "desperdicio" },
+        { texto: "Transporte interno desnecessário: carregar o fermentador pesado entre cômodos.", categoria: "desperdicio" },
+        { texto: "Misturar o açúcar de carbonatação de forma muito agressiva.", categoria: "desperdicio" },
         { texto: "Retrabalho: abrir e tampar garrafas novamente porque o arrolhador falhou.", categoria: "desperdicio" }
     ];
 
@@ -1013,7 +1030,7 @@
                 <div class="rank-pos ${isFirst ? 'gold' : ''}">${isFirst ? '🏆' : (i+1)+'º'}</div>
                 <div class="rank-nome">${j.nome}</div>
                 <div class="rank-bar"><div class="rank-bar-fill" style="width:${pct}%"></div></div>
-                <div class="rank-scorea"><span>${j.pontuacao}</span>/10</div>
+                <div class="rank-scorea"><span>${j.pontuacao}</span>/30</div>
             `;
             el.appendChild(div);
         });
