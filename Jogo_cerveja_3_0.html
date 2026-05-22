@@ -69,7 +69,7 @@
             width: 100%;
             max-width: 560px;
             margin: 0 auto;
-            padding: 0 16px 32px;
+            padding: 0 20px 40px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -78,7 +78,7 @@
 
         /* ===== HEADER ===== */
         .header {
-            padding: 18px 0 14px;
+            padding: 30px 0 20px;
             text-align: center;
             width: 100%;
         }
@@ -95,7 +95,7 @@
 
         .game-title {
             font-family: 'Metal Mania', cursive;
-            font-size: clamp(1.6em, 6vw, 2.4em);
+            font-size: clamp(2em, 8vw, 3em);
             color: var(--white);
             text-shadow: 
                 0 0 20px var(--red-glow),
@@ -107,7 +107,7 @@
 
         .game-subtitle {
             font-family: 'Special Elite', cursive;
-            font-size: 0.7em;
+            font-size: 0.8em;
             color: var(--gold);
             letter-spacing: 0.15em;
             opacity: 0.9;
@@ -344,14 +344,14 @@
             background: linear-gradient(160deg, #1e1e1e 0%, #141414 100%);
             border: 1px solid #2a2a2a;
             border-radius: 4px;
-            padding: 24px 20px;
-            min-height: 140px;
+            padding: 36px 28px;
+            min-height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Special Elite', cursive;
-            font-size: 0.95em;
-            line-height: 1.6;
+            font-size: 1.05em;
+            line-height: 1.7;
             color: var(--white);
             text-align: center;
             box-shadow: 
@@ -397,9 +397,9 @@
         }
 
         .btn-opcao {
-            padding: 12px 16px;
+            padding: 16px 20px;
             font-family: 'Oswald', sans-serif;
-            font-size: 0.82em;
+            font-size: 0.9em;
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
@@ -609,8 +609,8 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
+            background: rgba(0,0,0,0.9);
+            z-index: 200;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -627,7 +627,7 @@
 
         .result-big {
             font-family: 'Metal Mania', cursive;
-            font-size: clamp(3em, 15vw, 5em);
+            font-size: clamp(4em, 20vw, 7em);
             color: var(--red);
             text-shadow: 0 0 40px var(--red-glow), 0 0 80px var(--red-glow);
             line-height: 1;
@@ -650,7 +650,7 @@
 
         .result-name {
             font-family: 'Metal Mania', cursive;
-            font-size: 1.3em;
+            font-size: 1.8em;
             color: var(--gold);
             text-shadow: none;
             margin-bottom: 6px;
@@ -680,49 +680,6 @@
             color: #333;
             text-transform: uppercase;
             text-align: center;
-        }
-    .result-cats {
-            width: 100%;
-            max-width: 360px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 32px;
-        }
-        .result-cat-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 2px;
-        }
-        .result-cat-dot {
-            width: 10px; height: 10px;
-            border-radius: 50%; flex-shrink: 0;
-        }
-        .result-cat-name {
-            flex: 1;
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.8em;
-            letter-spacing: 0.1em;
-            color: var(--grey-light);
-            text-transform: uppercase;
-        }
-        .result-cat-bar {
-            width: 80px; height: 3px;
-            background: #222; border-radius: 2px; overflow: hidden;
-        }
-        .result-cat-bar-fill {
-            height: 100%; width: 0%;
-            border-radius: 2px;
-            transition: width 0.6s ease;
-        }
-        .result-cat-val {
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.85em;
-            color: var(--grey-light);
-            min-width: 36px; text-align: right;
         }
     </style>
 </head>
@@ -762,7 +719,6 @@
         <input type="text" id="nome-jogador" placeholder="Como te chamam?" maxlength="15">
         <button class="btn-primary" onclick="prepararJogo()">⚡ Iniciar Partida</button>
         <button class="btn-secondary" onclick="mostrarTelaRanking()">Ver Ranking</button>
-        <a href="index.html" style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.4);text-decoration:none;border:1px solid rgba(255,255,255,0.1);padding:0.4rem 1.2rem;display:block;width:fit-content;margin:0.75rem auto 0;transition:all 0.2s;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">← Voltar ao Site</a>
     </div>
 
     <!-- TELA JOGO -->
@@ -809,9 +765,6 @@
         <div class="feedback-area">
             <div class="feedback-pill" id="feedback"></div>
         </div>
-        <div style="text-align:center;margin-top:0.75rem;">
-            <a href="index.html" style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.45);text-decoration:none;border:1px solid rgba(255,255,255,0.12);padding:0.45rem 1.2rem;transition:all 0.2s;display:inline-block;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.45)';this.style.borderColor='rgba(255,255,255,0.12)'">← Voltar ao Site</a>
-        </div>
     </div>
 
     <!-- TELA RANKING -->
@@ -831,28 +784,6 @@
     <div class="result-name" id="result-nome"></div>
     <div class="result-big" id="result-score"></div>
     <div class="result-total">acertos de 30</div>
-
-    <div class="result-cats">
-        <div class="result-cat-row">
-            <div class="result-cat-dot" style="background:var(--green-bright);box-shadow:0 0 6px var(--green-glow)"></div>
-            <div class="result-cat-name">Agrega Valor</div>
-            <div class="result-cat-bar"><div class="result-cat-bar-fill" id="bar-agrega" style="background:var(--green-bright)"></div></div>
-            <div class="result-cat-val"><span id="res-agrega">0</span>/10</div>
-        </div>
-        <div class="result-cat-row">
-            <div class="result-cat-dot" style="background:var(--yellow-bright);box-shadow:0 0 6px var(--yellow-glow)"></div>
-            <div class="result-cat-name">Necessário</div>
-            <div class="result-cat-bar"><div class="result-cat-bar-fill" id="bar-necessario" style="background:var(--yellow-bright)"></div></div>
-            <div class="result-cat-val"><span id="res-necessario">0</span>/10</div>
-        </div>
-        <div class="result-cat-row">
-            <div class="result-cat-dot" style="background:var(--red-bright);box-shadow:0 0 6px var(--red-glow)"></div>
-            <div class="result-cat-name">Desperdício</div>
-            <div class="result-cat-bar"><div class="result-cat-bar-fill" id="bar-desperdicio" style="background:var(--red-bright)"></div></div>
-            <div class="result-cat-val"><span id="res-desperdicio">0</span>/10</div>
-        </div>
-    </div>
-
     <div class="result-btns">
         <button class="btn-primary" onclick="fecharResultado(); mostrarTelaRanking()">Ver Ranking</button>
         <button class="btn-secondary" onclick="fecharResultado(); mostrarTelaInicio()">Jogar Novamente</button>
@@ -956,8 +887,18 @@
         aguardandoResposta = true;
         document.querySelectorAll('.btn-opcao').forEach(b => b.classList.add('disabled'));
 
-        const acertou = cat === cartasEmbaralhadas[indiceAtual].categoria;
-        if (acertou) { acertos++; acertosCat[cartasEmbaralhadas[indiceAtual].categoria]++; document.getElementById("acertos").innerText = acertos; }
+        const catCerta = cartasEmbaralhadas[indiceAtual].categoria;
+        const acertou = cat === catCerta;
+        if (acertou) { acertos++; acertosCat[catCerta]++; document.getElementById("acertos").innerText = acertos; }
+
+        // Se errou, iluminar a resposta certa
+        if (!acertou) {
+            const map = { agrega: 0, necessario: 1, desperdicio: 2 };
+            const btnCerto = document.querySelectorAll('.btn-opcao')[map[catCerta]];
+            btnCerto.style.boxShadow = '0 0 0 3px #ffffff, 0 0 24px rgba(255,255,255,0.8)';
+            btnCerto.style.opacity = '1';
+            btnCerto.style.filter = 'brightness(1.6)';
+        }
 
         const fb = document.getElementById("feedback");
         fb.textContent = acertou ? '✔ Correto!' : '✖ Errou!';
@@ -966,8 +907,13 @@
         indiceAtual++;
         setTimeout(() => {
             fb.classList.remove('show');
+            document.querySelectorAll('.btn-opcao').forEach(b => {
+                b.style.boxShadow = '';
+                b.style.filter = '';
+                b.style.opacity = '';
+            });
             setTimeout(mostrarCarta, 150);
-        }, 900);
+        }, 1300);
     }
 
     function finalizarJogo() {
@@ -975,11 +921,6 @@
         document.getElementById("progresso").style.width = '100%';
         document.getElementById("result-nome").textContent = nomeAtual;
         document.getElementById("result-score").textContent = acertos;
-        ['agrega','necessario','desperdicio'].forEach(cat => {
-            const v = acertosCat[cat];
-            document.getElementById("res-" + cat).textContent = v;
-            document.getElementById("bar-" + cat).style.width = (v / 10 * 100) + '%';
-        });
         document.getElementById("tela-resultado").classList.add('show');
     }
 
