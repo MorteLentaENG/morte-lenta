@@ -646,6 +646,410 @@
         }
 
         /* ===== RESULT OVERLAY ===== */
+        .result-cats {
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .result-cat-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 2px;
+        }
+
+        .result-cat-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .result-cat-name {
+            flex: 1;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8em;
+            letter-spacing: 0.1em;
+            color: var(--grey-light);
+            text-transform: uppercase;
+        }
+
+        .result-cat-val {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1em;
+            color: var(--white);
+        }
+
+        .result-cat-bar {
+            width: 60px;
+            height: 3px;
+            background: #222;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .result-cat-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: auto;
+            padding-top: 24px;
+            font-size: 0.6em;
+            letter-spacing: 0.3em;
+            color: #333;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="brand-label">Morte Lenta · Cerveja Artesanal</div>
+        <div class="game-title">Trilha do<br>Malte</div>
+        <div class="game-subtitle">O jogo da fabricação</div>
+        <div class="divider"></div>
+    </div>
+
+    <!-- TELA INÍCIO -->
+    <div id="tela-inicio" class="tela ativo">
+        <p class="intro-text">
+            Classifique as atividades do processo de fabricação da cerveja. Cada carta revela uma etapa — cabe a você julgar se ela agrega, é necessária ou é puro desperdício.
+        </p>
+
+        <div class="legend">
+            <div class="legend-title">Categorias</div>
+            <div class="legend-item">
+                <div class="legend-dot dot-green"></div>
+                <span>Agrega Valor ao processo</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot dot-yellow"></div>
+                <span>Necessário, mas não agrega valor</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot dot-red"></div>
+                <span>Desperdício puro — não agrega e não é necessário</span>
+            </div>
+        </div>
+
+        <div class="input-label">Seu nome</div>
+        <input type="text" id="nome-jogador" placeholder="Como te chamam?" maxlength="15">
+        <button class="btn-primary" onclick="prepararJogo()">⚡ Iniciar Partida</button>
+        <button class="btn-secondary" onclick="mostrarTelaRanking()">Ver Ranking</button>
+    </div>
+
+    <!-- TELA JOGO -->
+    <div id="tela-jogo" class="tela">
+        <div class="hud">
+            <div class="hud-item">
+                <div class="hud-label">Carta</div>
+                <div class="hud-value red"><span id="contador">0</span><span style="color:#333;font-size:0.7em">/30</span></div>
+            </div>
+            <div class="hud-item" style="flex:1;padding:0 16px">
+                <div class="progress-bar" style="margin:0">
+                    <div class="progress-fill" id="progresso" style="width:0%"></div>
+                </div>
+            </div>
+            <div class="hud-item">
+                <div class="hud-label">Acertos</div>
+                <div class="hud-value"><span id="acertos">0</span></div>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="carta" id="carta-area">
+                <div class="carta-corners">
+                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
+  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
+  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
+</svg>
+                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
+  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
+  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
+</svg>
+                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
+  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
+  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
+</svg>
+                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
+  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
+  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
+</svg>
+                </div>
+                <div class="carta-num" id="carta-num">1/30</div>
+                <div id="carta-texto">Carregando...</div>
+            </div>
+        </div>
+
+        <div class="botoes" id="botoes-area">
+            <button class="btn-opcao btn-verde" onclick="responder('agrega')">
+                <div class="btn-dot" style="background:var(--green-bright);box-shadow:0 0 6px var(--green-glow)"></div>
+                Agrega Valor
+            </button>
+            <button class="btn-opcao btn-amarelo" onclick="responder('necessario')">
+                <div class="btn-dot" style="background:var(--yellow-bright);box-shadow:0 0 6px var(--yellow-glow)"></div>
+                Não Agrega, mas é Necessário
+            </button>
+            <button class="btn-opcao btn-vermelho" onclick="responder('desperdicio')">
+                <div class="btn-dot" style="background:var(--red-bright);box-shadow:0 0 6px var(--red-glow)"></div>
+                Não Agrega e Não é Necessário
+            </button>
+        </div>
+
+        <div class="feedback-area">
+            <div class="feedback-pill" id="feedback"></div>
+        </div>
+    </div>
+
+    <!-- TELA RANKING -->
+    <div id="tela-ranking" class="tela">
+        <div class="ranking-header">Ranking</div>
+        <div class="ranking-sub">Mestres da Fabricação</div>
+        <div class="tabela-ranking" id="lista-ranking"></div>
+        <button class="btn-primary" onclick="mostrarTelaInicio()">← Voltar ao Início</button>
+    </div>
+
+    <div class="footer">Morte Lenta · Cerveja Artesanal · Desde 2026</div>
+</div>
+
+<!-- TELA RESULTADO -->
+<div class="result-screen" id="tela-resultado">
+    <div class="result-label">Fim de Jogo</div>
+    <div class="result-name" id="result-nome"></div>
+    <div class="result-big" id="result-score"></div>
+    <div class="result-total">acertos de 30</div>
+
+    <div class="result-cats">
+        <div class="result-cat-row">
+            <div class="result-cat-dot" style="background:var(--green-bright);box-shadow:0 0 6px var(--green-glow)"></div>
+            <div class="result-cat-name">Agrega Valor</div>
+            <div class="result-cat-bar"><div class="result-cat-bar-fill" id="bar-agrega" style="background:var(--green-bright)"></div></div>
+            <div class="result-cat-val"><span id="res-agrega">0</span>/10</div>
+        </div>
+        <div class="result-cat-row">
+            <div class="result-cat-dot" style="background:var(--yellow-bright);box-shadow:0 0 6px var(--yellow-glow)"></div>
+            <div class="result-cat-name">Necessário</div>
+            <div class="result-cat-bar"><div class="result-cat-bar-fill" id="bar-necessario" style="background:var(--yellow-bright)"></div></div>
+            <div class="result-cat-val"><span id="res-necessario">0</span>/10</div>
+        </div>
+        <div class="result-cat-row">
+            <div class="result-cat-dot" style="background:var(--red-bright);box-shadow:0 0 6px var(--red-glow)"></div>
+            <div class="result-cat-name">Desperdício</div>
+            <div class="result-cat-bar"><div class="result-cat-bar-fill" id="bar-desperdicio" style="background:var(--red-bright)"></div></div>
+            <div class="result-cat-val"><span id="res-desperdicio">0</span>/10</div>
+        </div>
+    </div>
+
+    <div class="result-btns">
+        <button class="btn-primary" onclick="fecharResultado(); mostrarTelaRanking()">Ver Ranking</button>
+        <button class="btn-secondary" onclick="fecharResultado(); mostrarTelaInicio()">Jogar Novamente</button>
+    </div>
+</div>
+
+<script>
+    const atividades = [
+        { texto: "Adição de 1.444 g de malte (Pilsen + Munich) na água aquecida.", categoria: "agrega" },
+        { texto: "Manutenção da temperatura entre 65°C e 68°C por 60 min para extração de açúcares.", categoria: "agrega" },
+        { texto: "Elevação da temperatura para 76°C nos últimos 15 minutos da mostura.", categoria: "agrega" },
+        { texto: "Fervura do mosto por 60 minutos para esterilização.", categoria: "agrega" },
+        { texto: "Adição de 5 g de lúpulo Nugget no início da fervura (amargor).", categoria: "agrega" },
+        { texto: "Adição de 5 g de lúpulo Brewers Gold nos últimos 10 min (aroma).", categoria: "agrega" },
+        { texto: "Adição da levedura Ale no mosto para iniciar a fermentação.", categoria: "agrega" },
+        { texto: "Adição de 400 g de morango e 300 g de amora amassados no fermentador.", categoria: "agrega" },
+        { texto: "Adição de raspas e suco de 2 a 3 limões ao mosto fermentado.", categoria: "agrega" },
+        { texto: "Adição de açúcar (5 g por litro) antes do envase para gerar carbonatação.", categoria: "agrega" },
+        { texto: "Separação e pesagem prévia de todos os ingredientes.", categoria: "necessario" },
+        { texto: "Aquecimento inicial de cerca de 10 litros de água até atingir 68°C.", categoria: "necessario" },
+        { texto: "Separação (coagem) do líquido (mosto) dos grãos de malte.", categoria: "necessario" },
+        { texto: "Lavagem dos grãos com água quente a cerca de 75°C.", categoria: "necessario" },
+        { texto: "Resfriamento rápido do mosto fervido até aproximadamente 20°C.", categoria: "necessario" },
+        { texto: "Transferência do mosto resfriado da panela para o balde fermentador.", categoria: "necessario" },
+        { texto: "Fechamento do fermentador com o airlock.", categoria: "necessario" },
+        { texto: "Higienização rigorosa das frutas antes do preparo.", categoria: "necessario" },
+        { texto: "Higienização de todos os equipamentos antes do uso.", categoria: "necessario" },
+        { texto: "Envase (engarrafamento) do líquido e fechamento das garrafas.", categoria: "necessario" },
+        { texto: "Esquentar a água além dos 68°C por desatenção e esperar esfriar.", categoria: "desperdicio" },
+        { texto: "Procurar termômetro que foi guardado no lugar errado.", categoria: "desperdicio" },
+        { texto: "Derrubar parte do malte no chão e precisar limpar.", categoria: "desperdicio" },
+        { texto: "Demorar no resfriamento do mosto por não usar os equipamentos adequados.", categoria: "desperdicio" },
+        { texto: "Interromper a mostura porque esqueceu de comprar os lúpulos.", categoria: "desperdicio" },
+        { texto: "Oxigenar o mosto acidentalmente ao agitar o balde de forma brusca.", categoria: "desperdicio" },
+        { texto: "Exagerar na quantidade de limão, descaracterizando a receita original.", categoria: "desperdicio" },
+        { texto: "Transporte interno desnecessário: carregar o fermentador pesado entre cômodos.", categoria: "desperdicio" },
+        { texto: "Misturar o açúcar de carbonatação de forma muito agressiva.", categoria: "desperdicio" },
+        { texto: "Retrabalho: abrir e tampar garrafas novamente porque o arrolhador falhou.", categoria: "desperdicio" }
+    ];
+
+    let cartasEmbaralhadas = [], indiceAtual = 0, acertos = 0, nomeAtual = "", aguardandoResposta = false;
+    let acertosCat = { agrega: 0, necessario: 0, desperdicio: 0 };
+
+    function trocarTela(id) {
+        ['tela-inicio','tela-jogo','tela-ranking'].forEach(t => {
+            document.getElementById(t).classList.remove('ativo');
+        });
+        document.getElementById(id).classList.add('ativo');
+        window.scrollTo(0,0);
+    }
+
+    function mostrarTelaInicio() {
+        document.getElementById('nome-jogador').value = "";
+        trocarTela('tela-inicio');
+    }
+
+    function prepararJogo() {
+        const nome = document.getElementById('nome-jogador').value.trim();
+        if (!nome) { document.getElementById('nome-jogador').focus(); return; }
+        nomeAtual = nome;
+        cartasEmbaralhadas = embaralhar(atividades);
+        indiceAtual = 0; acertos = 0; aguardandoResposta = false;
+        acertosCat = { agrega: 0, necessario: 0, desperdicio: 0 };
+        document.getElementById("acertos").innerText = 0;
+        document.getElementById("feedback").classList.remove('show','correto','errado');
+        trocarTela('tela-jogo');
+        mostrarCarta();
+    }
+
+    function embaralhar(arr) {
+        let a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i+1));
+            [a[i],a[j]] = [a[j],a[i]];
+        }
+        return a;
+    }
+
+    function mostrarCarta() {
+        if (indiceAtual >= cartasEmbaralhadas.length) { finalizarJogo(); return; }
+        const n = indiceAtual + 1;
+        document.getElementById("contador").innerText = n;
+        document.getElementById("carta-num").innerText = `${n}/30`;
+        document.getElementById("carta-texto").innerText = cartasEmbaralhadas[indiceAtual].texto;
+        document.getElementById("progresso").style.width = ((n-1)/30*100) + '%';
+
+        const carta = document.getElementById('carta-area');
+        carta.style.opacity = '0';
+        carta.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+            carta.style.transition = 'opacity 0.3s, transform 0.3s';
+            carta.style.opacity = '1';
+            carta.style.transform = 'translateY(0)';
+        }, 50);
+
+        aguardandoResposta = false;
+        document.querySelectorAll('.btn-opcao').forEach(b => b.classList.remove('disabled'));
+    }
+
+    function responder(cat) {
+        if (aguardandoResposta) return;
+        aguardandoResposta = true;
+        document.querySelectorAll('.btn-opcao').forEach(b => b.classList.add('disabled'));
+
+        const cartaAtual = cartasEmbaralhadas[indiceAtual];
+        const acertou = cat === cartaAtual.categoria;
+
+        if (acertou) {
+            acertos++;
+            acertosCat[cartaAtual.categoria]++;
+            document.getElementById("acertos").innerText = acertos;
+        }
+
+        const fb = document.getElementById("feedback");
+        fb.textContent = acertou ? '✔ Correto!' : '✖ Errou!';
+        fb.className = 'feedback-pill show ' + (acertou ? 'correto' : 'errado');
+
+        indiceAtual++;
+        setTimeout(() => {
+            fb.classList.remove('show');
+            setTimeout(mostrarCarta, 150);
+        }, 900);
+    }
+
+    function finalizarJogo() {
+        salvarPontuacao(nomeAtual, acertos, acertosCat);
+        document.getElementById("progresso").style.width = '100%';
+        document.getElementById("result-nome").textContent = nomeAtual;
+        document.getElementById("result-score").textContent = acertos;
+
+        // Fill category result bars and values
+        ['agrega','necessario','desperdicio'].forEach(cat => {
+            const v = acertosCat[cat];
+            document.getElementById("res-" + cat).textContent = v;
+            document.getElementById("bar-" + cat).style.width = (v / 10 * 100) + '%';
+        });
+
+        document.getElementById("tela-resultado").classList.add('show');
+    }
+
+    function fecharResultado() {
+        document.getElementById("tela-resultado").classList.remove('show');
+    }
+
+    function salvarPontuacao(nome, pontuacao, cats) {
+        let ranking = JSON.parse(localStorage.getItem('mlRanking_v4')) || [];
+        ranking.push({ nome, pontuacao, cats, data: new Date().toLocaleDateString('pt-BR') });
+        ranking.sort((a,b) => b.pontuacao - a.pontuacao);
+        localStorage.setItem('mlRanking_v4', JSON.stringify(ranking));
+    }
+
+    function mostrarTelaRanking() {
+        trocarTela('tela-ranking');
+        const el = document.getElementById('lista-ranking');
+        el.innerHTML = "";
+        let ranking = JSON.parse(localStorage.getItem('mlRanking_v4')) || [];
+        if (!ranking.length) {
+            el.innerHTML = "<div class='empty-state'>Nenhuma pontuação ainda.<br>Seja o primeiro a jogar!</div>";
+            return;
+        }
+        ranking.forEach((j, i) => {
+            const div = document.createElement('div');
+            div.className = 'linha-ranking';
+            const isFirst = i === 0;
+            const pct = Math.round(j.pontuacao / 30 * 100);
+            const cats = j.cats || {};
+            div.innerHTML = `
+                <div class="rank-pos ${isFirst ? 'gold' : ''}">${isFirst ? '🏆' : (i+1)+'º'}</div>
+                <div style="flex:1">
+                    <div class="rank-nome">${j.nome}</div>
+                    ${cats.agrega !== undefined ? `<div style="font-size:0.65em;color:#555;letter-spacing:0.1em;margin-top:3px">
+                        <span style="color:#27ae60">●</span> ${cats.agrega}/10 &nbsp;
+                        <span style="color:#f39c12">●</span> ${cats.necessario}/10 &nbsp;
+                        <span style="color:#e74c3c">●</span> ${cats.desperdicio}/10
+                    </div>` : ''}
+                </div>
+                <div class="rank-bar"><div class="rank-bar-fill" style="width:${pct}%"></div></div>
+                <div class="rank-score"><span>${j.pontuacao}</span>/30</div>
+            `;
+            el.appendChild(div);
+        });
+    }
+</script>
+</body>
+</html>
+
         .result-screen {
             display: none;
             position: fixed;
@@ -876,38 +1280,7 @@
 </div>
 
 <script>
-    const atividades = [
-        { texto: "Adição de 1.444 g de malte (Pilsen + Munich) na água aquecida.", categoria: "agrega" },
-        { texto: "Manutenção da temperatura entre 65°C e 68°C por 60 min para extração de açúcares.", categoria: "agrega" },
-        { texto: "Elevação da temperatura para 76°C nos últimos 15 minutos da mostura.", categoria: "agrega" },
-        { texto: "Fervura do mosto por 60 minutos para esterilização.", categoria: "agrega" },
-        { texto: "Adição de 5 g de lúpulo Nugget no início da fervura (amargor).", categoria: "agrega" },
-        { texto: "Adição de 5 g de lúpulo Brewers Gold nos últimos 10 min (aroma).", categoria: "agrega" },
-        { texto: "Adição da levedura Ale no mosto para iniciar a fermentação.", categoria: "agrega" },
-        { texto: "Adição de 400 g de morango e 300 g de amora amassados no fermentador.", categoria: "agrega" },
-        { texto: "Adição de raspas e suco de 2 a 3 limões ao mosto fermentado.", categoria: "agrega" },
-        { texto: "Adição de açúcar (5 g por litro) antes do envase para gerar carbonatação.", categoria: "agrega" },
-        { texto: "Separação e pesagem prévia de todos os ingredientes.", categoria: "necessario" },
-        { texto: "Aquecimento inicial de cerca de 10 litros de água até atingir 68°C.", categoria: "necessario" },
-        { texto: "Separação (coagem) do líquido (mosto) dos grãos de malte.", categoria: "necessario" },
-        { texto: "Lavagem dos grãos com água quente a cerca de 75°C.", categoria: "necessario" },
-        { texto: "Resfriamento rápido do mosto fervido até aproximadamente 20°C.", categoria: "necessario" },
-        { texto: "Transferência do mosto resfriado da panela para o balde fermentador.", categoria: "necessario" },
-        { texto: "Fechamento do fermentador com o airlock.", categoria: "necessario" },
-        { texto: "Higienização rigorosa das frutas antes do preparo.", categoria: "necessario" },
-        { texto: "Higienização de todos os equipamentos antes do uso.", categoria: "necessario" },
-        { texto: "Envase (engarrafamento) do líquido e fechamento das garrafas.", categoria: "necessario" },
-        { texto: "Esquentar a água além dos 68°C por desatenção e esperar esfriar.", categoria: "desperdicio" },
-        { texto: "Procurar termômetro que foi guardado no lugar errado.", categoria: "desperdicio" },
-        { texto: "Derrubar parte do malte no chão e precisar limpar.", categoria: "desperdicio" },
-        { texto: "Demorar no resfriamento do mosto por não usar os equipamentos adequados.", categoria: "desperdicio" },
-        { texto: "Interromper a mostura porque esqueceu de comprar os lúpulos.", categoria: "desperdicio" },
-        { texto: "Oxigenar o mosto acidentalmente ao agitar o balde de forma brusca.", categoria: "desperdicio" },
-        { texto: "Exagerar na quantidade de limão, descaracterizando a receita original.", categoria: "desperdicio" },
-        { texto: "Transporte interno desnecessário: carregar o fermentador pesado entre cômodos.", categoria: "desperdicio" },
-        { texto: "Misturar o açúcar de carbonatação de forma muito agressiva.", categoria: "desperdicio" },
-        { texto: "Retrabalho: abrir e tampar garrafas novamente porque o arrolhador falhou.", categoria: "desperdicio" }
-    ];
+    
 
     let cartasEmbaralhadas = [], indiceAtual = 0, acertos = 0, nomeAtual = "", aguardandoResposta = false;
 
