@@ -4,47 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trilha do Malte — Morte Lenta</title>
-<style>
-  .nav-jogo { font-family: 'Metal Mania', cursive !important; font-size: 0.85rem !important; letter-spacing: 0.05em !important; }
-
-    @media (max-width: 768px) {
-      .container { padding: 1rem; }
-      .header { padding: 1rem; }
-      .game-title { font-size: 2rem; }
-      .board { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-      .card { font-size: 0.6rem; padding: 0.3rem; min-height: 60px; }
-      .card-text { font-size: 0.55rem; }
-      .players-panel { flex-direction: column; gap: 0.5rem; }
-      .player-token { width: 30px; height: 30px; font-size: 0.7rem; }
-      .btn { padding: 0.6rem 1rem; font-size: 0.75rem; }
-      .modal-content { padding: 1.5rem; margin: 1rem; }
-      .modal-title { font-size: 1.2rem; }
-    }
-    @media (max-width: 480px) {
-      .game-title { font-size: 1.5rem; }
-      .board { grid-template-columns: repeat(4, 1fr); gap: 3px; }
-      .card { font-size: 0.5rem; min-height: 50px; }
-    }
-    
-  
-  .btn-voltar {
-    display: block;
-    font-family: 'Cinzel', serif;
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(245,240,232,0.35);
-    text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 0.4rem 1rem;
-    margin: 0.5rem auto 0;
-    width: fit-content;
-    transition: all 0.2s;
-    background: transparent;
-  }
-  .btn-voltar:hover { color: #c0170f; border-color: #c0170f; }
-
-  </style>
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@300;400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -646,58 +605,70 @@
         }
 
         /* ===== RESULT OVERLAY ===== */
-        .result-cats {
-            width: 100%;
-            max-width: 360px;
+        .result-screen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .result-screen.show { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result-big {
+            font-family: 'Metal Mania', cursive;
+            font-size: clamp(3em, 15vw, 5em);
+            color: var(--red);
+            text-shadow: 0 0 40px var(--red-glow), 0 0 80px var(--red-glow);
+            line-height: 1;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 40px var(--red-glow), 0 0 80px var(--red-glow); }
+            50% { text-shadow: 0 0 60px var(--red-glow), 0 0 120px var(--red-glow), 0 0 160px var(--red-glow); }
+        }
+
+        .result-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75em;
+            letter-spacing: 0.4em;
+            color: var(--grey);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .result-name {
+            font-family: 'Metal Mania', cursive;
+            font-size: 1.3em;
+            color: var(--gold);
+            text-shadow: none;
+            margin-bottom: 6px;
+        }
+
+        .result-total {
+            font-family: 'Special Elite', cursive;
+            color: var(--grey-light);
+            margin-bottom: 40px;
+            font-size: 1em;
+        }
+
+        .result-btns {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 32px;
-        }
-
-        .result-cat-row {
-            display: flex;
-            align-items: center;
             gap: 12px;
-            padding: 12px 16px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 2px;
-        }
-
-        .result-cat-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .result-cat-name {
-            flex: 1;
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.8em;
-            letter-spacing: 0.1em;
-            color: var(--grey-light);
-            text-transform: uppercase;
-        }
-
-        .result-cat-val {
-            font-family: 'Oswald', sans-serif;
-            font-weight: 700;
-            font-size: 1em;
-            color: var(--white);
-        }
-
-        .result-cat-bar {
-            width: 60px;
-            height: 3px;
-            background: #222;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .result-cat-bar-fill {
-            height: 100%;
-            border-radius: 2px;
+            width: 100%;
+            max-width: 360px;
         }
 
         /* ===== FOOTER ===== */
@@ -709,6 +680,49 @@
             color: #333;
             text-transform: uppercase;
             text-align: center;
+        }
+    .result-cats {
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+        .result-cat-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 2px;
+        }
+        .result-cat-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%; flex-shrink: 0;
+        }
+        .result-cat-name {
+            flex: 1;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8em;
+            letter-spacing: 0.1em;
+            color: var(--grey-light);
+            text-transform: uppercase;
+        }
+        .result-cat-bar {
+            width: 80px; height: 3px;
+            background: #222; border-radius: 2px; overflow: hidden;
+        }
+        .result-cat-bar-fill {
+            height: 100%; width: 0%;
+            border-radius: 2px;
+            transition: width 0.6s ease;
+        }
+        .result-cat-val {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85em;
+            color: var(--grey-light);
+            min-width: 36px; text-align: right;
         }
     </style>
 </head>
@@ -770,37 +784,8 @@
 
         <div class="card-container">
             <div class="carta" id="carta-area">
-                <div class="carta-corners">
-                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
-  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
-  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
-  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
-</svg>
-                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
-  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
-  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
-  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
-</svg>
-                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
-  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
-  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
-  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
-</svg>
-                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M2 2 L12 2 M2 2 L2 12" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M2 2 L7 7" stroke="#c0392b" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
-  <circle cx="2" cy="2" r="1.5" fill="#c0392b"/>
-  <circle cx="12" cy="2" r="1" fill="#c0392b" opacity="0.5"/>
-  <circle cx="2" cy="12" r="1" fill="#c0392b" opacity="0.5"/>
-</svg>
-                </div>
                 <div class="carta-num" id="carta-num">1/30</div>
+                <div class="carta-icon">🍺</div>
                 <div id="carta-texto">Carregando...</div>
             </div>
         </div>
@@ -822,6 +807,9 @@
 
         <div class="feedback-area">
             <div class="feedback-pill" id="feedback"></div>
+        </div>
+        <div style="text-align:center;margin-top:0.75rem;">
+            <a href="index.html" style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.45);text-decoration:none;border:1px solid rgba(255,255,255,0.12);padding:0.45rem 1.2rem;transition:all 0.2s;display:inline-block;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.45)';this.style.borderColor='rgba(255,255,255,0.12)'">← Voltar ao Site</a>
         </div>
     </div>
 
@@ -904,8 +892,7 @@
         { texto: "Retrabalho: abrir e tampar garrafas novamente porque o arrolhador falhou.", categoria: "desperdicio" }
     ];
 
-    let cartasEmbaralhadas = [], indiceAtual = 0, acertos = 0, nomeAtual = "", aguardandoResposta = false;
-    let acertosCat = { agrega: 0, necessario: 0, desperdicio: 0 };
+    let cartasEmbaralhadas = [], indiceAtual = 0, acertos = 0, acertosCat = {agrega:0, necessario:0, desperdicio:0}, nomeAtual = "", aguardandoResposta = false;
 
     function trocarTela(id) {
         ['tela-inicio','tela-jogo','tela-ranking'].forEach(t => {
@@ -925,384 +912,7 @@
         if (!nome) { document.getElementById('nome-jogador').focus(); return; }
         nomeAtual = nome;
         cartasEmbaralhadas = embaralhar(atividades);
-        indiceAtual = 0; acertos = 0; aguardandoResposta = false;
-        acertosCat = { agrega: 0, necessario: 0, desperdicio: 0 };
-        document.getElementById("acertos").innerText = 0;
-        document.getElementById("feedback").classList.remove('show','correto','errado');
-        trocarTela('tela-jogo');
-        mostrarCarta();
-    }
-
-    function embaralhar(arr) {
-        let a = [...arr];
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i+1));
-            [a[i],a[j]] = [a[j],a[i]];
-        }
-        return a;
-    }
-
-    function mostrarCarta() {
-        if (indiceAtual >= cartasEmbaralhadas.length) { finalizarJogo(); return; }
-        const n = indiceAtual + 1;
-        document.getElementById("contador").innerText = n;
-        document.getElementById("carta-num").innerText = `${n}/30`;
-        document.getElementById("carta-texto").innerText = cartasEmbaralhadas[indiceAtual].texto;
-        document.getElementById("progresso").style.width = ((n-1)/30*100) + '%';
-
-        const carta = document.getElementById('carta-area');
-        carta.style.opacity = '0';
-        carta.style.transform = 'translateY(10px)';
-        setTimeout(() => {
-            carta.style.transition = 'opacity 0.3s, transform 0.3s';
-            carta.style.opacity = '1';
-            carta.style.transform = 'translateY(0)';
-        }, 50);
-
-        aguardandoResposta = false;
-        document.querySelectorAll('.btn-opcao').forEach(b => b.classList.remove('disabled'));
-    }
-
-    function responder(cat) {
-        if (aguardandoResposta) return;
-        aguardandoResposta = true;
-        document.querySelectorAll('.btn-opcao').forEach(b => b.classList.add('disabled'));
-
-        const cartaAtual = cartasEmbaralhadas[indiceAtual];
-        const acertou = cat === cartaAtual.categoria;
-
-        if (acertou) {
-            acertos++;
-            acertosCat[cartaAtual.categoria]++;
-            document.getElementById("acertos").innerText = acertos;
-        }
-
-        const fb = document.getElementById("feedback");
-        fb.textContent = acertou ? '✔ Correto!' : '✖ Errou!';
-        fb.className = 'feedback-pill show ' + (acertou ? 'correto' : 'errado');
-
-        indiceAtual++;
-        setTimeout(() => {
-            fb.classList.remove('show');
-            setTimeout(mostrarCarta, 150);
-        }, 900);
-    }
-
-    function finalizarJogo() {
-        salvarPontuacao(nomeAtual, acertos, acertosCat);
-        document.getElementById("progresso").style.width = '100%';
-        document.getElementById("result-nome").textContent = nomeAtual;
-        document.getElementById("result-score").textContent = acertos;
-
-        // Fill category result bars and values
-        ['agrega','necessario','desperdicio'].forEach(cat => {
-            const v = acertosCat[cat];
-            document.getElementById("res-" + cat).textContent = v;
-            document.getElementById("bar-" + cat).style.width = (v / 10 * 100) + '%';
-        });
-
-        document.getElementById("tela-resultado").classList.add('show');
-    }
-
-    function fecharResultado() {
-        document.getElementById("tela-resultado").classList.remove('show');
-    }
-
-    function salvarPontuacao(nome, pontuacao, cats) {
-        let ranking = JSON.parse(localStorage.getItem('mlRanking_v4')) || [];
-        ranking.push({ nome, pontuacao, cats, data: new Date().toLocaleDateString('pt-BR') });
-        ranking.sort((a,b) => b.pontuacao - a.pontuacao);
-        localStorage.setItem('mlRanking_v4', JSON.stringify(ranking));
-    }
-
-    function mostrarTelaRanking() {
-        trocarTela('tela-ranking');
-        const el = document.getElementById('lista-ranking');
-        el.innerHTML = "";
-        let ranking = JSON.parse(localStorage.getItem('mlRanking_v4')) || [];
-        if (!ranking.length) {
-            el.innerHTML = "<div class='empty-state'>Nenhuma pontuação ainda.<br>Seja o primeiro a jogar!</div>";
-            return;
-        }
-        ranking.forEach((j, i) => {
-            const div = document.createElement('div');
-            div.className = 'linha-ranking';
-            const isFirst = i === 0;
-            const pct = Math.round(j.pontuacao / 30 * 100);
-            const cats = j.cats || {};
-            div.innerHTML = `
-                <div class="rank-pos ${isFirst ? 'gold' : ''}">${isFirst ? '🏆' : (i+1)+'º'}</div>
-                <div style="flex:1">
-                    <div class="rank-nome">${j.nome}</div>
-                    ${cats.agrega !== undefined ? `<div style="font-size:0.65em;color:#555;letter-spacing:0.1em;margin-top:3px">
-                        <span style="color:#27ae60">●</span> ${cats.agrega}/10 &nbsp;
-                        <span style="color:#f39c12">●</span> ${cats.necessario}/10 &nbsp;
-                        <span style="color:#e74c3c">●</span> ${cats.desperdicio}/10
-                    </div>` : ''}
-                </div>
-                <div class="rank-bar"><div class="rank-bar-fill" style="width:${pct}%"></div></div>
-                <div class="rank-score"><span>${j.pontuacao}</span>/30</div>
-            `;
-            el.appendChild(div);
-        });
-    }
-</script>
-</body>
-</html>
-
-        .result-screen {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 200;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .result-screen.show { display: flex; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .result-big {
-            font-family: 'Metal Mania', cursive;
-            font-size: clamp(4em, 20vw, 7em);
-            color: var(--red);
-            text-shadow: 0 0 40px var(--red-glow), 0 0 80px var(--red-glow);
-            line-height: 1;
-            animation: pulse 1.5s ease infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { text-shadow: 0 0 40px var(--red-glow), 0 0 80px var(--red-glow); }
-            50% { text-shadow: 0 0 60px var(--red-glow), 0 0 120px var(--red-glow), 0 0 160px var(--red-glow); }
-        }
-
-        .result-label {
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.75em;
-            letter-spacing: 0.4em;
-            color: var(--grey);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .result-name {
-            font-family: 'Metal Mania', cursive;
-            font-size: 1.8em;
-            color: var(--gold);
-            text-shadow: none;
-            margin-bottom: 6px;
-        }
-
-        .result-total {
-            font-family: 'Special Elite', cursive;
-            color: var(--grey-light);
-            margin-bottom: 40px;
-            font-size: 1em;
-        }
-
-        .result-btns {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 360px;
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            margin-top: auto;
-            padding-top: 24px;
-            font-size: 0.6em;
-            letter-spacing: 0.3em;
-            color: #333;
-            text-transform: uppercase;
-            text-align: center;
-        }
-    
-    @media (max-width: 768px) {
-      .container { padding: 1rem; }
-      .header { padding: 1rem; }
-      .game-title { font-size: 2rem; }
-      .board { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-      .card { font-size: 0.6rem; padding: 0.3rem; min-height: 60px; }
-      .card-text { font-size: 0.55rem; }
-      .players-panel { flex-direction: column; gap: 0.5rem; }
-      .player-token { width: 30px; height: 30px; font-size: 0.7rem; }
-      .btn { padding: 0.6rem 1rem; font-size: 0.75rem; }
-      .modal-content { padding: 1.5rem; margin: 1rem; }
-      .modal-title { font-size: 1.2rem; }
-    }
-    @media (max-width: 480px) {
-      .game-title { font-size: 1.5rem; }
-      .board { grid-template-columns: repeat(4, 1fr); gap: 3px; }
-      .card { font-size: 0.5rem; min-height: 50px; }
-    }
-    
-  
-  .btn-voltar {
-    display: block;
-    font-family: 'Cinzel', serif;
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(245,240,232,0.35);
-    text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 0.4rem 1rem;
-    margin: 0.5rem auto 0;
-    width: fit-content;
-    transition: all 0.2s;
-    background: transparent;
-  }
-  .btn-voltar:hover { color: #c0170f; border-color: #c0170f; }
-
-  </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="header">
-        <div class="brand-label">Morte Lenta · Cerveja Artesanal</div>
-        
-        <div class="game-title">Trilha do<br>Malte</div>
-        <div class="game-subtitle">O jogo da fabricação</div>
-        <div class="divider"></div>
-    </div>
-
-    <!-- TELA INÍCIO -->
-    <div id="tela-inicio" class="tela ativo">
-        <p class="intro-text">
-            Classifique as atividades do processo de fabricação da cerveja. Cada carta revela uma etapa — cabe a você julgar se ela agrega, é necessária ou é puro desperdício.
-        </p>
-
-        <div class="legend">
-            <div class="legend-title">Categorias</div>
-            <div class="legend-item">
-                <div class="legend-dot dot-green"></div>
-                <span>Agrega Valor ao processo</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-dot dot-yellow"></div>
-                <span>Necessário, mas não agrega valor</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-dot dot-red"></div>
-                <span>Desperdício puro — não agrega e não é necessário</span>
-            </div>
-        </div>
-
-        <div class="input-label">Seu nome</div>
-        <input type="text" id="nome-jogador" placeholder="Como te chamam?" maxlength="15">
-        <button class="btn-primary" onclick="prepararJogo()">⚡ Iniciar Partida</button>
-        <button class="btn-secondary" onclick="mostrarTelaRanking()">Ver Ranking</button>
-        <a href="index.html" class="btn-voltar">← Voltar ao Site</a>
-    </div>
-
-    <!-- TELA JOGO -->
-    <div id="tela-jogo" class="tela">
-
-        <div class="hud">
-            <div class="hud-item">
-                <div class="hud-label">Carta</div>
-                <div class="hud-value red"><span id="contador">0</span><span style="color:#333;font-size:0.7em">/30</span></div>
-            </div>
-            <div class="hud-item" style="flex:1;padding:0 16px">
-                <div class="progress-bar" style="margin:0">
-                    <div class="progress-fill" id="progresso" style="width:0%"></div>
-                </div>
-            </div>
-            <div class="hud-item">
-                <div class="hud-label">Acertos</div>
-                <div class="hud-value"><span id="acertos">0</span></div>
-            </div>
-        </div>
-
-        <div class="card-container">
-            <div class="carta" id="carta-area">
-                <div class="carta-num" id="carta-num">1/30</div>
-                <div class="carta-icon">🍺</div>
-                <div id="carta-texto">Carregando...</div>
-            </div>
-        </div>
-
-        <div class="botoes" id="botoes-area">
-            <button class="btn-opcao btn-verde" onclick="responder('agrega')">
-                <div class="btn-dot" style="background:var(--green-bright);box-shadow:0 0 6px var(--green-glow)"></div>
-                Agrega Valor
-            </button>
-            <button class="btn-opcao btn-amarelo" onclick="responder('necessario')">
-                <div class="btn-dot" style="background:var(--yellow-bright);box-shadow:0 0 6px var(--yellow-glow)"></div>
-                Não Agrega, mas é Necessário
-            </button>
-            <button class="btn-opcao btn-vermelho" onclick="responder('desperdicio')">
-                <div class="btn-dot" style="background:var(--red-bright);box-shadow:0 0 6px var(--red-glow)"></div>
-                Não Agrega e Não é Necessário
-            </button>
-        </div>
-
-        <div class="feedback-area">
-            <div class="feedback-pill" id="feedback"></div>
-        </div>
-        <div style="display:flex;gap:0.75rem;justify-content:center;margin-top:0.5rem;">
-            <a href="index.html" style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.4);text-decoration:none;border:1px solid rgba(255,255,255,0.1);padding:0.35rem 1rem;transition:all 0.2s;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">⬡ Voltar ao Site</a>
-        </div>
-    </div>
-
-    <!-- TELA RANKING -->
-    <div id="tela-ranking" class="tela">
-        <div class="ranking-header">Ranking</div>
-        <div class="ranking-sub">Mestres da Fabricação</div>
-        <div class="tabela-ranking" id="lista-ranking"></div>
-        <button class="btn-primary" onclick="mostrarTelaInicio()">← Voltar ao Início</button>
-    </div>
-
-    <div class="footer">Morte Lenta · Cerveja Artesanal · Desde 2026</div>
-</div>
-
-<!-- TELA RESULTADO -->
-<div class="result-screen" id="tela-resultado">
-    <div class="result-label">Fim de Jogo</div>
-    <div class="result-name" id="result-nome"></div>
-    <div class="result-big" id="result-score"></div>
-    <div class="result-total">acertos de 30</div>
-    <div class="result-btns">
-        <button class="btn-primary" onclick="fecharResultado(); mostrarTelaRanking()">Ver Ranking</button>
-        <button class="btn-secondary" onclick="fecharResultado(); mostrarTelaInicio()">Jogar Novamente</button>
-    </div>
-</div>
-
-<script>
-    
-
-    let cartasEmbaralhadas = [], indiceAtual = 0, acertos = 0, nomeAtual = "", aguardandoResposta = false;
-
-    function trocarTela(id) {
-        ['tela-inicio','tela-jogo','tela-ranking'].forEach(t => {
-            document.getElementById(t).classList.remove('ativo');
-        });
-        document.getElementById(id).classList.add('ativo');
-        window.scrollTo(0,0);
-    }
-
-    function mostrarTelaInicio() {
-        document.getElementById('nome-jogador').value = "";
-        trocarTela('tela-inicio');
-    }
-
-    function prepararJogo() {
-        const nome = document.getElementById('nome-jogador').value.trim();
-        if (!nome) { document.getElementById('nome-jogador').focus(); return; }
-        nomeAtual = nome;
-        cartasEmbaralhadas = embaralhar(atividades);
-        indiceAtual = 0; acertos = 0; aguardandoResposta = false;
+        indiceAtual = 0; acertos = 0; acertosCat = {agrega:0, necessario:0, desperdicio:0}; aguardandoResposta = false;
         document.getElementById("acertos").innerText = 0;
         document.getElementById("feedback").classList.remove('show','correto','errado');
         trocarTela('tela-jogo');
@@ -1340,20 +950,13 @@
         document.querySelectorAll('.btn-opcao').forEach(b => b.classList.remove('disabled'));
     }
 
-    function voltarMenu() {
-        if (confirm('Deseja voltar ao menu? O progresso será perdido.')) {
-            document.getElementById('tela-jogo').classList.remove('ativa');
-            document.getElementById('tela-inicio').classList.add('ativa');
-        }
-    }
-
     function responder(cat) {
         if (aguardandoResposta) return;
         aguardandoResposta = true;
         document.querySelectorAll('.btn-opcao').forEach(b => b.classList.add('disabled'));
 
         const acertou = cat === cartasEmbaralhadas[indiceAtual].categoria;
-        if (acertou) { acertos++; document.getElementById("acertos").innerText = acertos; }
+        if (acertou) { acertos++; acertosCat[cartasEmbaralhadas[indiceAtual].categoria]++; document.getElementById("acertos").innerText = acertos; }
 
         const fb = document.getElementById("feedback");
         fb.textContent = acertou ? '✔ Correto!' : '✖ Errou!';
@@ -1371,6 +974,11 @@
         document.getElementById("progresso").style.width = '100%';
         document.getElementById("result-nome").textContent = nomeAtual;
         document.getElementById("result-score").textContent = acertos;
+        ['agrega','necessario','desperdicio'].forEach(cat => {
+            const v = acertosCat[cat];
+            document.getElementById("res-" + cat).textContent = v;
+            document.getElementById("bar-" + cat).style.width = (v / 10 * 100) + '%';
+        });
         document.getElementById("tela-resultado").classList.add('show');
     }
 
