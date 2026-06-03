@@ -14,7 +14,7 @@
 <header>
   <div class="header-top">
     <div class="header-left">
-      <div class="header-social"><a href="#"></a></div>
+      <div class="header-social"><a href="#">Instagram</a></div>
     </div>
 
     <div class="header-logo">
@@ -33,13 +33,12 @@
     <a href="#observabilidade" onclick="setActive(this)">Observabilidade</a>
     <a href="#sobre" onclick="setActive(this)">Sobre Nós</a>
     <a href="artigo.html">Artigo</a>
-    <a href="Jogo_cerveja_3_0.html" style="font-family:'Metal Mania',cursive!important;font-size:0.9rem;letter-spacing:0.05em;text-transform:none!important;">Trilha do Malte</a>
   </nav>
 </header>
 
 <!-- ─── HERO ─── -->
 <section id="inicio">
-  <div class="hero-eyebrow">Cervejaria Artesanal · SENAC · Brasil</div>
+  <div class="hero-eyebrow">Cervejaria Artesanal · Puro Malte · Brasil</div>
   <img src="Imagens/Ml_image.png" alt="Morte Lenta" class="hero-logo-img">
   <div class="hero-divider"></div>
   <p class="hero-tagline">
@@ -50,7 +49,7 @@
     <a href="#sobre" class="btn-outline">Nossa História</a>
   </div>
   <div class="hero-scroll-inline">
-    <span>Conheça as profundezas</span>
+    <span>Desça</span>
     <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
       <path d="M8 2v20M2 16l6 6 6-6" stroke="rgba(245,240,232,0.6)" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
@@ -317,7 +316,7 @@
     </div>
 
     <div class="sobre-content reveal" style="transition-delay:0.2s">
-      <h2>A Morte<em>Lenta</em></h2>
+      <h2>A Morte que <em>Sabe Bem</em></h2>
       <div style="width:60px;height:2px;background:linear-gradient(90deg,var(--vermelho),transparent);margin:1rem 0 1.5rem;"></div>
       <p>A Morte Lenta surgiu em um projeto do 3º semestre de Engenharia. Além de fazer a cerveja, desenvolvemos um sistema que monitora a temperatura da produção em tempo real, envia alertas pelo Telegram através de uma API e controla automaticamente o aquecimento se passar da temperatura definida, o forno desliga para resfriar e depois volta a aquecer.
 
@@ -337,7 +336,7 @@ A Morte Lenta é isso um projeto feito na raça, aprendendo com os erros e evolu
         </div>
         <div class="sobre-value-item">
           <div class="value-icon"></div>
-          <div class="value-text"><strong>Ingredientes</strong><span>Puro malte, lúpulo selecionado, Frutas Vermelhas do Assai KKKK.</span></div>
+          <div class="value-text"><strong>Ingredientes</strong><span>Puro malte, lúpulo selecionado, sem atalhos.</span></div>
         </div>
         <div class="sobre-value-item">
           <div class="value-icon"></div>
@@ -360,7 +359,7 @@ A Morte Lenta é isso um projeto feito na raça, aprendendo com os erros e evolu
     <a href="#sobre">Sobre</a>
   </div>
   <div class="footer-credits">
-     Agradecimento ao Jesus Cavalcante teve participação importante na construção das ideias e direcionamento deste projeto.
+    Jesus Cavalcanti teve participação importante na construção das ideias e direcionamento deste projeto.
   </div>
   <div class="footer-bottom">
     © 2026 Cervejaria Morte Lenta · Projeto Acadêmico · Beba com Responsabilidade
@@ -529,6 +528,7 @@ window.addEventListener('scroll', () => {
 
 
 
+// ─── HEADER SOME AO SAIR DO INÍCIO ───
 (function() {
   const header = document.querySelector('header');
   const inicio = document.getElementById('inicio');
