@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Trilha do Malte — Morte Lenta</title>
+    <title>Trilha da Morte — Morte Lenta</title>
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@300;400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -688,7 +688,7 @@
 <div class="container">
     <div class="header">
         <div class="brand-label">Morte Lenta · Cerveja Artesanal</div>
-        <div class="game-title">Trilha do<br>Malte</div>
+        <div class="game-title">Trilha da<br>Morte</div>
         <div class="game-subtitle">O jogo da fabricação</div>
         <div class="divider"></div>
     </div>
@@ -719,6 +719,7 @@
         <input type="text" id="nome-jogador" placeholder="Como te chamam?" maxlength="15">
         <button class="btn-primary" onclick="prepararJogo()">⚡ Iniciar Partida</button>
         <button class="btn-secondary" onclick="mostrarTelaRanking()">Ver Ranking</button>
+        <a href="index.html" style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.4);text-decoration:none;border:1px solid rgba(255,255,255,0.1);padding:0.4rem 1.2rem;display:block;width:fit-content;margin:0.5rem auto 0;transition:all 0.2s;" onmouseover="this.style.color='#c0170f';this.style.borderColor='#c0170f'" onmouseout="this.style.color='rgba(245,240,232,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">← Voltar ao Site</a>
     </div>
 
     <!-- TELA JOGO -->
@@ -775,7 +776,7 @@
         <button class="btn-primary" onclick="mostrarTelaInicio()">← Voltar ao Início</button>
     </div>
 
-    <div class="footer">Morte Lenta · Cerveja Artesanal · Desde 2026</div>
+    <div class="footer">Morte Lenta &nbsp; Cerveja Artesanal &nbsp; Desde 2026</div>
 </div>
 
 <!-- TELA RESULTADO -->
@@ -824,7 +825,7 @@
         { texto: "Retrabalho: abrir e tampar garrafas novamente porque o arrolhador falhou.", categoria: "desperdicio" }
     ];
 
-    let cartasEmbaralhadas = [], indiceAtual = 0, acertos = 0, acertosCat = {agrega:0, necessario:0, desperdicio:0}, nomeAtual = "", aguardandoResposta = false;
+    let cartasEmbaralhadas = [], indiceAtual = 0, acertos = 0, nomeAtual = "", aguardandoResposta = false;
 
     function trocarTela(id) {
         ['tela-inicio','tela-jogo','tela-ranking'].forEach(t => {
@@ -842,9 +843,15 @@
     function prepararJogo() {
         const nome = document.getElementById('nome-jogador').value.trim();
         if (!nome) { document.getElementById('nome-jogador').focus(); return; }
+        
+        // 🥚 Easter egg Dell
+        if (nome.toLowerCase() === 'dell') {
+            document.getElementById('easter-egg-dell').style.display = 'flex';
+            return;
+        }
         nomeAtual = nome;
         cartasEmbaralhadas = embaralhar(atividades);
-        indiceAtual = 0; acertos = 0; acertosCat = {agrega:0, necessario:0, desperdicio:0}; aguardandoResposta = false;
+        indiceAtual = 0; acertos = 0; aguardandoResposta = false;
         document.getElementById("acertos").innerText = 0;
         document.getElementById("feedback").classList.remove('show','correto','errado');
         trocarTela('tela-jogo');
@@ -887,18 +894,8 @@
         aguardandoResposta = true;
         document.querySelectorAll('.btn-opcao').forEach(b => b.classList.add('disabled'));
 
-        const catCerta = cartasEmbaralhadas[indiceAtual].categoria;
-        const acertou = cat === catCerta;
-        if (acertou) { acertos++; acertosCat[catCerta]++; document.getElementById("acertos").innerText = acertos; }
-
-        // Se errou, iluminar a resposta certa
-        if (!acertou) {
-            const map = { agrega: 0, necessario: 1, desperdicio: 2 };
-            const btnCerto = document.querySelectorAll('.btn-opcao')[map[catCerta]];
-            btnCerto.style.boxShadow = '0 0 0 3px #ffffff, 0 0 24px rgba(255,255,255,0.8)';
-            btnCerto.style.opacity = '1';
-            btnCerto.style.filter = 'brightness(1.6)';
-        }
+        const acertou = cat === cartasEmbaralhadas[indiceAtual].categoria;
+        if (acertou) { acertos++; document.getElementById("acertos").innerText = acertos; }
 
         const fb = document.getElementById("feedback");
         fb.textContent = acertou ? '✔ Correto!' : '✖ Errou!';
@@ -907,13 +904,8 @@
         indiceAtual++;
         setTimeout(() => {
             fb.classList.remove('show');
-            document.querySelectorAll('.btn-opcao').forEach(b => {
-                b.style.boxShadow = '';
-                b.style.filter = '';
-                b.style.opacity = '';
-            });
             setTimeout(mostrarCarta, 150);
-        }, 1300);
+        }, 900);
     }
 
     function finalizarJogo() {
@@ -959,5 +951,16 @@
         });
     }
 </script>
+
+<div id="easter-egg-dell" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:99999;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;">
+    <img src="Mario_dell.png" alt="Mario Dell" style="max-width:90%;max-height:55vh;object-fit:contain;border-radius:8px;margin-bottom:1.5rem;">
+    <p style="font-family:'Metal Mania',cursive;font-size:clamp(1.1rem,4vw,1.8rem);color:#e74c3c;line-height:1.5;max-width:600px;text-shadow:0 0 20px rgba(231,76,60,0.6);">
+        Com o sapatinho da humildade eu quero que se foda a DELL
+    </p>
+    <button onclick="document.getElementById('easter-egg-dell').style.display='none';" style="margin-top:2rem;font-family:'Oswald',sans-serif;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;background:#c0392b;color:#f0ece4;border:none;padding:0.85rem 2rem;cursor:pointer;border-radius:2px;">
+        Fechar (se tiver coragem)
+    </button>
+</div>
+
 </body>
 </html>
