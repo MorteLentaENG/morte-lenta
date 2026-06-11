@@ -168,11 +168,24 @@
   }
   .autor-card {
     background: var(--preto2);
-    padding: 1.4rem 1rem;
+    padding: 1.4rem 1rem 1.2rem;
     transition: background 0.2s;
     text-align: center;
   }
   .autor-card:hover { background: #191919; }
+  .autor-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    margin: 0 auto 0.9rem;
+    border: 2px solid rgba(210,25,15,0.45);
+    background: #0a0a0a;
+    transition: border-color 0.2s;
+  }
+  .autor-card:hover .autor-avatar { border-color: var(--vermelho); }
   .autor-nome {
     font-family: 'Cinzel', serif;
     font-size: 0.7rem;
@@ -506,50 +519,96 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .header-top { padding: 0.7rem 1rem; }
-    .header-logo img { height: 38px; }
+    /* Header */
+    .header-top { padding: 0.6rem 1rem; }
+    .header-logo img { height: 36px; }
     .header-right { display: none; }
-    nav { gap: 1rem; padding: 0.5rem 0.8rem; overflow-x: auto; white-space: nowrap; font-size: 0.55rem; }
-    .artigo-hero { padding: 120px 1.2rem 3rem; min-height: auto; }
-    .hero-title { font-size: clamp(0.95rem, 4vw, 1.4rem); }
-    .hero-subtitulo { font-size: 0.95rem; }
-    .hero-keywords { gap: 0.4rem; }
-    .kw { font-size: 0.5rem; padding: 0.3rem 0.7rem; }
-    .artigo-body { padding: 2.5rem 1rem 4rem; }
-    .resumo-block { padding: 1.2rem 1.2rem; }
-    .resumo-texto { font-size: 0.98rem; }
-    .autores-section { padding: 2rem 1rem; }
+    .header-left a { font-size: 0.52rem; }
+
+    /* Nav scrollável horizontal */
+    nav {
+      gap: 0;
+      padding: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      display: flex;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+    nav a {
+      font-size: 0.5rem;
+      letter-spacing: 0.15em;
+      padding: 0.55rem 0.9rem;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Hero */
+    .artigo-hero {
+      padding: 115px 1rem 2.5rem;
+      min-height: auto;
+    }
+    .hero-eyebrow { font-size: 0.5rem; letter-spacing: 0.2em; margin-bottom: 1rem; }
+    .hero-title { font-size: clamp(0.9rem, 4.5vw, 1.3rem); line-height: 1.3; }
+    .hero-rule { margin: 1.2rem auto; }
+    .hero-subtitulo { font-size: 0.92rem; margin-bottom: 1.5rem; }
+    .hero-keywords { gap: 0.35rem; }
+    .kw { font-size: 0.48rem; padding: 0.28rem 0.6rem; }
+
+    /* Autores */
+    .autores-section { padding: 1.8rem 0.8rem; }
     .autores-grid { grid-template-columns: 1fr 1fr; }
     .autores-ultima-linha .autor-card { width: 50%; }
-    .autor-nome { font-size: 0.65rem; }
-    .fases-grid { grid-template-columns: 1fr; }
-    .figuras-duplas { grid-template-columns: 1fr; }
-    .figuras-duplas .figura-bloco img { height: 240px; }
-    .figura-bloco.figura-retrato img { max-width: 100%; }
-    .destaque-grid { grid-template-columns: 1fr 1fr; }
-    .destaque-val { font-size: 1.4rem; }
-    table { font-size: 0.75rem; }
-    thead th, tbody td { padding: 0.5rem 0.6rem; }
-    .conclusao-box { padding: 1.2rem 1.2rem; }
-    p { font-size: 1rem; }
-  }
-  @media (max-width: 480px) {
-    .header-top { padding: 0.6rem 0.8rem; }
-    nav { gap: 0.8rem; font-size: 0.5rem; }
-    .artigo-hero { padding: 110px 1rem 2.5rem; }
-    .hero-title { font-size: clamp(0.88rem, 5vw, 1.2rem); }
-    .hero-eyebrow { font-size: 0.52rem; letter-spacing: 0.2em; }
-    .autores-grid { grid-template-columns: 1fr; }
-    .autores-ultima-linha .autor-card { width: 100%; }
-    .destaque-grid { grid-template-columns: 1fr 1fr; }
-    .arq-flow { flex-direction: column; align-items: center; }
-    .arq-arrow { transform: rotate(90deg); }
+    .autor-avatar { width: 64px; height: 64px; }
+    .autor-nome { font-size: 0.6rem; }
+    .autor-role { font-size: 0.55rem; }
+
+    /* Corpo */
+    .artigo-body { padding: 2rem 1rem 4rem; }
+    .resumo-block { padding: 1.2rem; }
+    .resumo-texto { font-size: 0.96rem; }
+    p { font-size: 0.98rem; }
     .secao-titulo { font-size: 1rem; }
     .subsecao-titulo { font-size: 0.75rem; }
-    .tabela-wrapper { font-size: 0.7rem; }
-    thead th, tbody td { padding: 0.4rem 0.5rem; white-space: normal; }
-    .resumo-block { padding: 1rem; }
-    .conclusao-box { padding: 1rem; }
+
+    /* Fases */
+    .fases-grid { grid-template-columns: 1fr; }
+
+    /* Figuras */
+    .figuras-duplas { grid-template-columns: 1fr; }
+    .figuras-duplas .figura-bloco img { height: 220px; }
+    .figura-bloco.figura-retrato img { max-width: 100%; }
+
+    /* Destaques */
+    .destaque-grid { grid-template-columns: 1fr 1fr; }
+    .destaque-val { font-size: 1.3rem; }
+    .destaque-desc { font-size: 0.5rem; }
+
+    /* Tabelas */
+    .tabela-wrapper { margin: 1.5rem -0.5rem; }
+    table { font-size: 0.7rem; }
+    thead th, tbody td { padding: 0.45rem 0.5rem; }
+
+    /* Outros */
+    .conclusao-box { padding: 1.2rem; }
+    .arq-flow { flex-direction: column; align-items: center; }
+    .arq-arrow { transform: rotate(90deg); }
+  }
+
+  @media (max-width: 400px) {
+    .header-top { padding: 0.5rem 0.8rem; }
+    .header-logo img { height: 30px; }
+    nav a { font-size: 0.46rem; padding: 0.5rem 0.7rem; }
+    .artigo-hero { padding: 105px 0.8rem 2rem; }
+    .hero-title { font-size: clamp(0.85rem, 5vw, 1.1rem); }
+    .autores-grid { grid-template-columns: 1fr 1fr; }
+    .autores-ultima-linha .autor-card { width: 50%; }
+    .autor-avatar { width: 56px; height: 56px; }
+    .destaque-grid { grid-template-columns: 1fr 1fr; }
+    .artigo-body { padding: 1.5rem 0.8rem 3rem; }
   }
 </style>
 </head>
@@ -582,10 +641,11 @@
 <!-- HERO -->
 <section class="artigo-hero">
   <div class="hero-eyebrow">Engenharia da Computação · Centro Universitário SENAC São Paulo · 2026</div>
-  <h1 class="hero-title">Morte Lenta: <em>Sistema IoT</em> de Monitoramento</h1>
+  <h1 class="hero-title">Morte Lenta: <em>Sistema IoT</em> de Monitoramento e Automação para Produção de Cerveja Artesanal</h1>
   <div class="hero-rule"></div>
   <p class="hero-subtitulo">
-Solução IoT de baixo custo para monitoramento e automação da produção de cerveja artesanal.  </p>
+    Uma solução de baixo custo para automação das fases críticas de brassagem e fermentação, integrando ESP32, LoRaWAN, n8n, InfluxDB e Grafana em uma arquitetura IoT de quatro camadas.
+  </p>
   <div class="hero-keywords">
     <span class="kw">IoT</span>
     <span class="kw">Cerveja Artesanal</span>
@@ -600,35 +660,42 @@ Solução IoT de baixo custo para monitoramento e automação da produção de c
 <!-- AUTORES -->
 <section class="autores-section">
   <div class="autores-inner">
-    <div class="section-eyebrow">— Membros —</div>
+    <div class="section-eyebrow">— Autores —</div>
     <div class="autores-grid">
       <div class="autor-card">
+        <img class="autor-avatar" src="Imagens/Kezia.png" alt="Kezia Soares">
         <div class="autor-nome">Kezia Soares</div>
         <div class="autor-role">Líder de Projeto</div>
       </div>
       <div class="autor-card">
+        <img class="autor-avatar" src="Imagens/João.png" alt="João Pedro Ferro e Silva">
         <div class="autor-nome">João Pedro Ferro e Silva</div>
-        <div class="autor-role">Projetista de Hardware/Desenvolvedor</div>
+        <div class="autor-role">Projetista de Hardware</div>
       </div>
       <div class="autor-card">
-        <div class="autor-nome">Lucas Rodrigues de Melo</div>
-        <div class="autor-role">Tech Writer</div>
-      </div>
-      <div class="autor-card">
-        <div class="autor-nome">Rafael Assis da Silva</div>
-        <div class="autor-role">Manufatura</div>
-      </div>
-           <div class="autor-card">
+        <img class="autor-avatar" src="Imagens/Mike.png" alt="Mikael Aurio Martins de Paula">
         <div class="autor-nome">Mikael Aurio Martins de Paula</div>
         <div class="autor-role">Projetista de Prototipagem</div>
       </div>
       <div class="autor-card">
+        <img class="autor-avatar" src="Imagens/Lucas.png" alt="Lucas Rodrigues de Melo">
+        <div class="autor-nome">Lucas Rodrigues de Melo</div>
+        <div class="autor-role">Tech Writer</div>
+      </div>
+      <div class="autor-card">
+        <img class="autor-avatar" src="Imagens/Rafael.png" alt="Rafael Assis da Silva">
+        <div class="autor-nome">Rafael Assis da Silva</div>
+        <div class="autor-role">Manufatura</div>
+      </div>
+      <div class="autor-card">
+        <img class="autor-avatar" src="Imagens/Sarain.png" alt="Rafael Sarain Assis da Silva">
         <div class="autor-nome">Rafael Sarain Assis da Silva</div>
-        <div class="autor-role">Projetista de Prototipagem</div>
+        <div class="autor-role">Desenvolvedor</div>
       </div>
     </div>
     <div class="autores-ultima-linha">
       <div class="autor-card">
+        <img class="autor-avatar" src="Imagens/Vitor.png" alt="Vitor Nery Araujo">
         <div class="autor-nome">Vitor Nery Araujo</div>
         <div class="autor-role">Desenvolvedor</div>
       </div>
