@@ -174,18 +174,21 @@
   }
   .autor-card:hover { background: #191919; }
   .autor-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 140px;
+    height: 160px;
+    border-radius: 12px;
     object-fit: cover;
-    object-position: top center;
+    object-position: center 10%;
     display: block;
     margin: 0 auto 0.9rem;
     border: 2px solid rgba(210,25,15,0.45);
     background: #0a0a0a;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.2s;
   }
-  .autor-card:hover .autor-avatar { border-color: var(--vermelho); }
+  .autor-card:hover .autor-avatar {
+    border-color: var(--vermelho);
+    transform: scale(1.03);
+  }
   .autor-nome {
     font-family: 'Cinzel', serif;
     font-size: 0.7rem;
@@ -562,7 +565,7 @@
     .autores-section { padding: 1.8rem 0.8rem; }
     .autores-grid { grid-template-columns: 1fr 1fr; }
     .autores-ultima-linha .autor-card { width: 50%; }
-    .autor-avatar { width: 64px; height: 64px; }
+    .autor-avatar { width: 110px; height: 125px; border-radius: 8px; }
     .autor-nome { font-size: 0.6rem; }
     .autor-role { font-size: 0.55rem; }
 
@@ -606,7 +609,7 @@
     .hero-title { font-size: clamp(0.85rem, 5vw, 1.1rem); }
     .autores-grid { grid-template-columns: 1fr 1fr; }
     .autores-ultima-linha .autor-card { width: 50%; }
-    .autor-avatar { width: 56px; height: 56px; }
+    .autor-avatar { width: 90px; height: 105px; border-radius: 6px; }
     .destaque-grid { grid-template-columns: 1fr 1fr; }
     .artigo-body { padding: 1.5rem 0.8rem 3rem; }
   }
