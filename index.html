@@ -121,8 +121,6 @@
       </div>
     </div>
 
-
-
   </div>
 </section>
 
@@ -163,7 +161,7 @@
         <div class="cerveja-style">Cerveja Fruit · Artesanal</div>
         <p class="cerveja-desc">Morangos e frutas vermelhas em harmonia com o malte. Uma cerveja que surpreende!</p>
         <div class="cerveja-stats">
-          <div class="stat-item"><span class="stat-value"></span><span class="stat-label"ABV</span></div>
+          <div class="stat-item"><span class="stat-value"></span><span class="stat-label">ABV</span></div>
           <div class="stat-item"><span class="stat-value"></span><span class="stat-label"></span></div>
           <div class="stat-item"><span class="stat-value"></span><span class="stat-label"></span></div>
           <div class="stat-item"><span class="stat-value"></span><span class="stat-label"></span></div>
@@ -271,34 +269,34 @@
           <div class="etapa-item">
             <div class="etapa-dot" style="background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.6)"></div>
             <span class="etapa-name">Fervura</span>
-            <span class="etapa-temp">100°C</span>
+            <span class="etapa-temp"></span>
             <span class="etapa-status status-done">✓ Concluído</span>
           </div>
           <div class="etapa-item">
-            <div class="etapa-dot" style="background:#ff4444;box-shadow:0 0 6px rgba(255,68,68,0.8)"></div>
+            <div class="etapa-dot" style="background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.6)"></div>
             <span class="etapa-name">Fermentação</span>
-            <span class="etapa-temp">18°C</span>
-            <span class="etapa-status status-active">● Ativo</span>
+            <span class="etapa-temp"></span>
+            <span class="etapa-status status-done">✓ Concluído</span>
           </div>
           <div class="etapa-item">
-            <div class="etapa-dot" style="background:rgba(245,240,232,0.15)"></div>
+            <div class="etapa-dot" style="background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.6)"></div>
             <span class="etapa-name">Maturação</span>
-            <span class="etapa-temp">—</span>
-            <span class="etapa-status status-pending">Pendente</span>
+            <span class="etapa-temp"></span>
+            <span class="etapa-status status-done">✓ Concluído</span>
           </div>
           <div class="etapa-item">
-            <div class="etapa-dot" style="background:rgba(245,240,232,0.15)"></div>
+            <div class="etapa-dot" style="background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.6)"></div>
             <span class="etapa-name">Envase</span>
-            <span class="etapa-temp">—</span>
-            <span class="etapa-status status-pending">Pendente</span>
+            <span class="etapa-temp"></span>
+            <span class="etapa-status status-done">✓ Concluído</span>
           </div>
         </div>
         <div style="margin-top:1.25rem;padding:0.75rem;background:rgba(192,23,15,0.06);border:1px solid rgba(192,23,15,0.15);">
           <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.15em;color:var(--dourado);text-transform:uppercase;margin-bottom:0.4rem;">Progresso do Lote</div>
           <div style="height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
-            <div style="height:100%;width:62%;background:linear-gradient(90deg,var(--vermelho2),var(--vermelho));border-radius:3px;"></div>
+            <div style="height:100%;width:100%;background:linear-gradient(90deg,var(--vermelho2),var(--vermelho));border-radius:3px;"></div>
           </div>
-          <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.1em;color:rgba(245,240,232,0.4);text-transform:uppercase;margin-top:0.4rem;text-align:right;">62% Concluído</div>
+          <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.1em;color:rgba(245,240,232,0.4);text-transform:uppercase;margin-top:0.4rem;text-align:right;">100% Concluído</div>
         </div>
       </div>
     </div>
@@ -378,9 +376,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// métricas reais — sem animação simulada
-
-// ─── GRÁFICO REAL — DADOS DO PROCESSO ───
 const graficoData = {"labels":["10:04","10:05","10:06","10:07","10:08","10:09","10:10","10:11","10:12","10:14","10:15","10:16","10:17","10:18","10:19","10:20","10:22","10:23","10:24","10:25","10:26","10:27","10:28","10:30","10:31","10:32","10:34","10:35","10:36","10:37","10:38","10:39","10:40","10:41","10:42","10:43","10:44","10:45","10:46","10:47","10:48","10:49","10:50","10:51","10:52","10:53","10:54","10:55","10:56","10:57","10:58","10:59","11:00","11:01","11:02","11:03","11:04","11:05","11:06","11:07","11:08","11:09","11:10","11:11","11:13","11:14","11:15","11:16","11:17","11:18","11:19","11:20","11:21","11:22","11:23","11:24","11:25","11:26","11:27","11:28","11:29","11:30","11:31","11:32","11:33","11:34","11:35","11:36","11:37","11:38","11:39","11:40","11:41","11:42","11:43","11:44","11:45","11:46","11:47","11:48","11:49","11:50","11:51","11:52","11:53","11:54","11:55","11:56","11:57","11:58","11:59","12:00","12:01","12:03","12:04","12:05","12:06","12:07","12:08","12:09","12:10","12:11","12:14","12:15","12:16","12:17","12:18","12:19","12:20","12:21","12:22","12:23","12:24","12:25","12:26","12:27","12:28","12:29","12:30","12:31","12:32","12:33","12:34","12:35","12:36","12:37","12:38","12:39","12:40","12:41","12:42","12:43","12:52","12:53","12:54","12:55","12:56","12:57","12:58","12:59","13:00","13:02","13:06","13:07","13:08","13:09","13:11","13:12","13:13","13:14","13:15","13:16","13:17","13:18","13:19","13:20","13:21","13:22","13:23","13:24","13:25","13:26","13:27","13:28","13:29","13:30","13:31","13:32","13:33","13:34","13:35","13:36","13:37","13:38","13:39","13:40","13:41","13:42","13:43","13:44","13:45","13:49","13:55","13:56","14:04","14:05","14:06","14:07","14:08","14:09","14:10","14:11","14:12","14:13","14:14","14:15","14:17","14:18","14:19","14:20","14:21","14:22","14:23","14:24","14:25","14:26","14:27","14:28","14:29","14:30","14:31","14:32","14:33","14:34","14:35","14:36","14:37","14:38","14:39","14:40","14:41","14:42","14:43","14:44","14:45","14:46","14:47","14:48","14:49","14:51","14:52","14:53","14:54","15:00","15:01","15:02","15:03","15:04","15:05","15:06","15:07","15:08","15:09","15:10","15:11","15:12","15:13","15:14","15:15","15:16","15:17","15:18","15:19","15:20","15:21","15:22","15:23","15:24","15:26","15:27","15:28","15:29","15:30","15:31","15:32","15:33","15:34","15:35","15:36","15:37","15:38","15:39","15:40","15:41","15:42","15:43","15:44","15:46","15:47","15:48","15:49","15:50","15:51","15:52","15:53","15:54","15:55","15:56","15:57","15:58","15:59","16:00","16:01","16:02","16:03","16:04","16:05","16:06","16:07"],"temp":[23.5,25.62,25.69,25.69,25.75,25.88,25.81,25.88,25.88,26.0,25.94,26.06,26.06,26.19,24.19,23.81,23.87,24.12,24.37,24.87,25.44,26.25,26.81,27.56,28.12,28.5,29.44,29.94,30.31,30.75,31.44,31.87,32.38,32.81,33.25,33.63,34.19,34.5,34.88,35.38,35.75,36.19,36.75,37.06,37.31,37.81,38.06,38.81,38.88,39.25,39.56,40.0,40.38,40.63,41.19,41.5,42.13,42.13,42.88,42.81,43.38,43.69,43.81,44.5,44.38,44.88,45.38,45.44,46.06,46.06,46.44,47.06,46.94,47.25,47.5,48.0,48.31,48.44,48.69,49.0,49.0,49.5,49.94,50.19,50.38,50.75,50.88,51.06,51.44,51.81,51.69,52.31,52.31,52.56,52.75,53.0,53.19,53.13,53.44,53.69,54.13,54.06,54.31,54.56,54.56,55.06,54.88,55.06,55.0,54.69,54.75,53.94,53.87,53.87,53.87,53.69,53.94,53.13,53.19,53.25,53.56,45.69,54.44,57.75,56.13,62.25,63.38,59.56,65.06,65.06,68.19,75.94,75.31,75.87,75.81,74.06,74.44,74.37,74.0,73.19,73.31,72.69,72.12,71.56,71.12,70.75,68.81,67.37,65.81,65.87,65.75,65.81,70.19,68.19,67.44,66.25,65.94,65.56,67.25,71.19,70.75,67.75,68.75,69.94,67.56,66.75,65.94,65.69,64.06,64.12,64.62,63.25,66.44,67.5,57.0,62.88,62.31,61.56,61.31,61.13,61.0,60.81,60.63,60.44,60.25,60.06,59.88,59.69,62.81,71.0,62.0,61.56,61.19,60.25,59.88,67.94,63.94,63.5,63.69,63.63,63.56,62.81,61.69,61.56,86.87,89.69,92.81,96.31,98.81,99.37,99.25,99.31,99.37,98.94,85.0,61.37,97.81,98.31,98.37,98.37,98.37,98.37,98.37,98.37,98.31,98.44,98.44,98.44,98.31,98.44,98.37,98.44,98.37,98.37,98.37,98.44,98.25,94.0,95.5,97.37,98.37,97.94,96.63,97.56,98.5,98.5,98.37,98.44,98.44,98.56,98.44,98.44,88.81,98.56,98.62,98.37,98.75,98.62,98.69,98.75,98.75,98.75,98.81,98.44,97.81,97.12,96.5,96.0,95.5,94.87,94.06,93.31,92.94,92.56,92.19,91.75,91.25,90.75,87.56,84.19,82.56,82.69,81.31,82.0,79.19,80.62,79.44,78.31,68.31,62.19,57.06,52.88,49.5,46.94,44.81,42.62,40.75,39.19,37.13,35.63,34.63,33.63,32.75,31.87,30.81,29.63,28.38,27.19,26.06,25.06,23.87,22.13,21.5,21.44,21.5,21.62,23.31,21.87,20.81],"setpoint":[30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,30.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,70.0,65.0,65.0,65.0,65.0,65.0,67.0,67.0,67.0,67.0,67.0,68.0,67.5,67.5,67.5,67.5,67.5,67.5,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,67.0,76.0,76.0,76.0,76.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,75.0,100.0,100.0,100.0,100.0,100.0,74.0,70.0,70.0,70.0,70.0,70.0,76.0,76.0,76.0,76.0,76.0,100.0,70.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5,100.5],"etapa":["Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","Mostura","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","MashOut","Fervura","Fervura","Fervura","Fervura","Fervura","MashOut","Aquecendo","Aquecendo","Aquecendo","Aquecendo","Aquecendo","MashOut","MashOut","MashOut","MashOut","MashOut","Fervura","Aquecendo","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura","Fervura"]};
 
 new Chart(document.getElementById('tempChart').getContext('2d'), {
@@ -462,7 +457,6 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ─── CARROSSEL INFINITO ───
 (function() {
   const track = document.getElementById('carouselTrack');
   const dots = document.querySelectorAll('#carouselDots .carousel-dot');
@@ -475,13 +469,11 @@ window.addEventListener('scroll', () => {
   let current = 0;
   let isTransitioning = false;
 
-  // Clonar último antes e primeiro depois
   const firstClone = slides[0].cloneNode(true);
   const lastClone = slides[total - 1].cloneNode(true);
   track.appendChild(firstClone);
   track.insertBefore(lastClone, slides[0]);
 
-  // Começa no slide 1 (que é o original[0], pois [0] é o clone do último)
   let pos = 1;
   track.style.transition = 'none';
   track.style.transform = `translateX(-${pos * 100}%)`;
@@ -501,13 +493,11 @@ window.addEventListener('scroll', () => {
   }
 
   track.addEventListener('transitionend', () => {
-    // Se chegou no clone do primeiro (pos = total+1), volta sem animação para pos=1
     if (pos === total + 1) {
       track.style.transition = 'none';
       pos = 1;
       track.style.transform = `translateX(-${pos * 100}%)`;
     }
-    // Se chegou no clone do último (pos = 0), volta para pos=total
     if (pos === 0) {
       track.style.transition = 'none';
       pos = total;
@@ -527,9 +517,6 @@ window.addEventListener('scroll', () => {
   setInterval(() => moveTo(pos + 1, current + 1), 4000);
 })();
 
-
-
-// ─── HEADER SOME AO SAIR DO INÍCIO ───
 (function() {
   const header = document.querySelector('header');
   const inicio = document.getElementById('inicio');
@@ -538,11 +525,9 @@ window.addEventListener('scroll', () => {
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        // Está no hero — mostra
         header.style.transform = 'translateY(0)';
         header.style.opacity = '1';
       } else {
-        // Saiu do hero — some
         header.style.transform = 'translateY(-100%)';
         header.style.opacity = '0';
       }
@@ -551,7 +536,6 @@ window.addEventListener('scroll', () => {
 
   obs.observe(inicio);
 })();
-
 </script>
 </body>
 </html>
