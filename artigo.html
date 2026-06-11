@@ -3,105 +3,533 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Artigo — Morte Lenta Cervejaria</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>Artigo Científico — Morte Lenta Cervejaria</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="Css/style.css">
 <style>
-  .artigo-page {
-    min-height: 100vh;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --vermelho: #c0170f;
+    --dourado: #c9a84c;
+    --branco: #f5f0e8;
+    --cinza: rgba(245,240,232,0.6);
+    --cinza-fraco: rgba(245,240,232,0.28);
+    --preto: #0a0a0a;
+    --preto2: #111;
+    --preto3: #161616;
+    --borda: rgba(245,240,232,0.08);
+  }
+
+  body {
+    background: var(--preto);
+    color: var(--branco);
+    font-family: 'Crimson Text', serif;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER FALLBACK ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.97);
+    border-bottom: 1px solid var(--borda);
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 3rem;
+  }
+  .header-logo img { height: 52px; }
+  .header-left a, .header-right a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cinza-fraco);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .header-left a:hover, .header-right a:hover { color: var(--vermelho); }
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 0.6rem 3rem;
+    border-top: 1px solid var(--borda);
+  }
+  nav a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cinza-fraco);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover, nav a.active { color: var(--vermelho); }
+
+  /* ── HERO ── */
+  .artigo-hero {
+    min-height: 62vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 160px 2rem 4rem;
+    justify-content: flex-end;
+    padding: 160px 2rem 5rem;
     background:
-      radial-gradient(ellipse 70% 50% at 50% 40%, rgba(139,0,0,0.12) 0%, transparent 70%),
-      #0a0a0a;
-  }
-
-  .artigo-icon {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.4;
-  }
-
-  .artigo-titulo {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    color: #f5f0e8;
+      radial-gradient(ellipse 80% 55% at 50% 30%, rgba(139,0,0,0.2) 0%, transparent 65%),
+      repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(245,240,232,0.012) 80px, rgba(245,240,232,0.012) 81px),
+      var(--preto);
     text-align: center;
-    margin-bottom: 0.5rem;
   }
-
-  .artigo-titulo em {
-    color: #c0170f;
-    font-style: normal;
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: 1.6rem;
+    opacity: 0.9;
   }
-
-  .artigo-rule {
-    width: 80px;
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.55rem, 3.2vw, 2.7rem);
+    font-weight: 700;
+    color: var(--branco);
+    line-height: 1.22;
+    max-width: 800px;
+    margin-bottom: 0.4rem;
+  }
+  .hero-title em { color: var(--vermelho); font-style: normal; }
+  .hero-rule {
+    width: 56px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #c0170f, transparent);
-    margin: 1.5rem auto;
+    background: linear-gradient(90deg, transparent, var(--vermelho), transparent);
+    margin: 1.8rem auto;
   }
-
-  .artigo-subtitulo {
+  .hero-subtitulo {
     font-family: 'Crimson Text', serif;
     font-style: italic;
-    font-size: 1.2rem;
-    color: rgba(245,240,232,0.5);
-    text-align: center;
-    max-width: 500px;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
+    font-size: 1.12rem;
+    color: var(--cinza);
+    max-width: 680px;
+    line-height: 1.8;
+    margin-bottom: 2.6rem;
+  }
+  .hero-keywords {
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .kw {
+    font-family: 'Cinzel', serif;
+    font-size: 0.54rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cinza-fraco);
+    border: 1px solid rgba(245,240,232,0.12);
+    padding: 0.35rem 0.95rem;
   }
 
-  .artigo-badge {
+  /* ── AUTORES ── */
+  .autores-section {
+    background: var(--preto3);
+    border-top: 1px solid var(--borda);
+    border-bottom: 1px solid var(--borda);
+    padding: 3.2rem 2rem;
+  }
+  .autores-inner { max-width: 920px; margin: 0 auto; text-align: center; }
+  .section-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--vermelho);
+    margin-bottom: 2rem;
+  }
+  .autores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--borda);
+  }
+  .autores-ultima-linha {
+    display: flex;
+    justify-content: center;
+    background: var(--preto3);
+    margin-top: 1px;
+  }
+  .autores-ultima-linha .autor-card {
+    width: calc(33.333% - 0.5px);
+  }
+  .autor-card {
+    background: var(--preto2);
+    padding: 1.4rem 1rem;
+    transition: background 0.2s;
+    text-align: center;
+  }
+  .autor-card:hover { background: #191919; }
+  .autor-nome {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--branco);
+    margin-bottom: 0.5rem;
+    line-height: 1.45;
+  }
+  .autor-role {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    opacity: 0.8;
+  }
+
+  /* ── CORPO ── */
+  .artigo-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 5rem 2rem 7rem;
+  }
+
+  /* Resumo */
+  .resumo-block {
+    background: rgba(192,23,15,0.055);
+    border-left: 3px solid var(--vermelho);
+    padding: 2rem 2.5rem;
+    margin-bottom: 4rem;
+  }
+  .resumo-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--vermelho);
+    margin-bottom: 1rem;
+  }
+  .resumo-texto {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 1.06rem;
+    color: var(--cinza);
+    line-height: 1.85;
+  }
+  .resumo-texto strong { color: var(--branco); font-style: normal; }
+
+  /* Seções */
+  .secao { margin-bottom: 4.5rem; }
+  .secao-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.56rem;
+    letter-spacing: 0.38em;
+    color: var(--vermelho);
+    margin-bottom: 0.55rem;
+  }
+  .secao-titulo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.1rem, 2vw, 1.55rem);
+    font-weight: 700;
+    color: var(--branco);
+    margin-bottom: 1.6rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--borda);
+  }
+  .secao-titulo em { color: var(--vermelho); font-style: normal; }
+
+  .subsecao { margin-bottom: 2.8rem; }
+  .subsecao-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    color: var(--dourado);
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+  }
+
+  p {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.06rem;
+    color: var(--cinza);
+    line-height: 1.88;
+    margin-bottom: 1.1rem;
+  }
+  p strong { color: var(--branco); }
+
+  /* Listas */
+  ul.lista-artigo, ol.lista-artigo { list-style: none; padding: 0; margin: 1rem 0 1.5rem; }
+  ul.lista-artigo li {
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    color: var(--cinza);
+    line-height: 1.72;
+    padding: 0.48rem 0 0.48rem 1.7rem;
+    border-bottom: 1px solid rgba(245,240,232,0.04);
+    position: relative;
+  }
+  ul.lista-artigo li::before {
+    content: "—";
+    color: var(--vermelho);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  ul.lista-artigo li strong { color: var(--branco); }
+  ol.lista-artigo { counter-reset: obj; }
+  ol.lista-artigo li {
+    counter-increment: obj;
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    color: var(--cinza);
+    line-height: 1.72;
+    padding: 0.48rem 0 0.48rem 2.3rem;
+    border-bottom: 1px solid rgba(245,240,232,0.04);
+    position: relative;
+  }
+  ol.lista-artigo li::before {
+    content: "(" counter(obj, lower-roman) ")";
+    color: var(--dourado);
+    position: absolute;
+    left: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    top: 0.58rem;
+  }
+
+  /* ── FIGURAS ── */
+  .figura-bloco {
+    margin: 2.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .figura-bloco img {
+    width: 100%;
+    max-width: 720px;
+    max-height: 480px;
+    object-fit: contain;
+    display: block;
+    border: 1px solid var(--borda);
+    background: #0e0e0e;
+  }
+  /* Diagrama e dashboard ocupam largura total */
+  .figura-bloco.figura-larga img {
+    max-width: 100%;
+    max-height: 540px;
+    object-fit: cover;
+    object-position: top;
+  }
+  /* Fotos verticais (retrato) ficam mais estreitas */
+  .figura-bloco.figura-retrato img {
+    max-width: 420px;
+    max-height: 560px;
+    object-fit: cover;
+  }
+  /* Duplas lado a lado */
+  .figuras-duplas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+  .figuras-duplas .figura-bloco { margin: 0; }
+  .figuras-duplas .figura-bloco img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border: 1px solid var(--borda);
+    background: #0e0e0e;
+  }
+  .figura-caption {
+    font-family: 'Cinzel', serif;
+    font-size: 0.56rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cinza-fraco);
+    margin-top: 0.8rem;
+    text-align: center;
+  }
+  .figura-fonte {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.22);
+    text-align: center;
+    margin-top: 0.3rem;
+  }
+
+  /* Destaque cards */
+  .destaque-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 1px;
+    background: var(--borda);
+    margin: 2.2rem 0;
+  }
+  .destaque-card {
+    background: var(--preto3);
+    border-top: 2px solid var(--vermelho);
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+  }
+  .destaque-val {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.75rem;
+    color: var(--vermelho);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .destaque-val span { font-size: 1rem; color: var(--dourado); }
+  .destaque-desc {
+    font-family: 'Cinzel', serif;
+    font-size: 0.56rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  /* Fases */
+  .fases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 1px;
+    background: var(--borda);
+    margin: 1.5rem 0 2rem;
+  }
+  .fase-item { background: var(--preto3); padding: 1.35rem 1.5rem; }
+  .fase-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: 0.3rem;
+  }
+  .fase-tempo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    color: var(--vermelho);
+    margin-bottom: 0.4rem;
+  }
+  .fase-desc {
+    font-family: 'Crimson Text', serif;
+    font-size: 0.92rem;
+    color: var(--cinza);
+    line-height: 1.5;
+  }
+
+  /* Arquitetura flow */
+  .arq-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0 0.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+  }
+  .arq-node {
+    background: var(--preto3);
+    border: 1px solid rgba(192,23,15,0.35);
+    padding: 0.5rem 1rem;
+    color: var(--branco);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .arq-arrow { color: var(--vermelho); font-size: 1.2rem; line-height: 1; }
+
+  /* Tabelas */
+  .tabela-wrapper { overflow-x: auto; margin: 2rem 0 2.5rem; }
+  .tabela-caption {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: 0.9rem;
+    text-align: center;
+  }
+  table { width: 100%; border-collapse: collapse; font-family: 'Oswald', sans-serif; font-size: 0.85rem; }
+  thead tr { background: var(--vermelho); }
+  thead th { padding: 0.7rem 1rem; text-align: left; color: var(--branco); font-weight: 500; letter-spacing: 0.05em; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid var(--borda); transition: background 0.15s; }
+  tbody tr:hover { background: rgba(245,240,232,0.025); }
+  tbody td { padding: 0.65rem 1rem; color: var(--cinza); }
+  tbody td:first-child { color: var(--branco); font-weight: 500; }
+  .tabela-fonte { font-family: 'Crimson Text', serif; font-style: italic; font-size: 0.8rem; color: var(--cinza-fraco); text-align: right; margin-top: 0.5rem; }
+
+  /* Conclusão */
+  .conclusao-box {
+    background: rgba(201,168,76,0.045);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-left: 3px solid var(--dourado);
+    padding: 2rem 2.5rem;
+    margin: 2rem 0;
+  }
+  .conclusao-box p { font-size: 1.06rem; color: rgba(245,240,232,0.82); }
+
+  /* Refs */
+  .refs-list { list-style: none; padding: 0; }
+  .refs-list li {
+    font-family: 'Crimson Text', serif;
+    font-size: 0.92rem;
+    color: var(--cinza);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(245,240,232,0.04);
+    line-height: 1.65;
+  }
+
+  .divider { width: 100%; height: 1px; background: var(--borda); margin: 3.5rem 0; }
+
+  .btn-voltar {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #c9a84c;
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.25);
-    padding: 0.6rem 1.5rem;
-  }
-
-  .artigo-badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #c9a84c;
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  .artigo-back {
-    margin-top: 3rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(245,240,232,0.4);
+    color: var(--cinza-fraco);
     text-decoration: none;
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    border: 1px solid var(--borda);
+    padding: 0.8rem 2rem;
+    transition: all 0.2s;
+    margin-top: 2rem;
   }
+  .btn-voltar:hover { color: var(--vermelho); border-color: rgba(192,23,15,0.4); }
 
-  .artigo-back:hover { color: #c0170f; }
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header-top { padding: 0.9rem 1.2rem; }
+    nav { gap: 1.2rem; padding: 0.6rem 1rem; overflow-x: auto; white-space: nowrap; }
+    .artigo-hero { padding: 140px 1.2rem 4rem; }
+    .artigo-body { padding: 3rem 1.2rem 5rem; }
+    .resumo-block { padding: 1.5rem; }
+    .autores-grid { grid-template-columns: 1fr 1fr; }
+    .autores-ultima-linha .autor-card { width: calc(50% - 0.5px); }
+    .fases-grid { grid-template-columns: 1fr; }
+    .figuras-duplas { grid-template-columns: 1fr; }
+    .figuras-duplas .figura-bloco img { height: 260px; }
+  }
+  @media (max-width: 480px) {
+    .autores-grid { grid-template-columns: 1fr; }
+    .autores-ultima-linha .autor-card { width: 100%; }
+    .destaque-grid { grid-template-columns: 1fr 1fr; }
+    .arq-flow { flex-direction: column; }
+    .arq-arrow { transform: rotate(90deg); }
+    .figura-bloco.figura-retrato img { max-width: 100%; }
+  }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <div class="header-top">
     <div class="header-left">
@@ -117,35 +545,501 @@
   <nav>
     <a href="index.html">Início</a>
     <a href="index.html#identidade">Nossa Identidade</a>
-    <a href="index.html#cervejas">Cervejas & Merch</a>
+    <a href="index.html#cervejas">Cervejas &amp; Merch</a>
     <a href="index.html#observabilidade">Observabilidade</a>
     <a href="index.html#sobre">Sobre Nós</a>
     <a href="artigo.html" class="active">Artigo</a>
   </nav>
 </header>
 
-<div class="artigo-page">
-  <div class="artigo-icon">📄</div>
 
-  <h1 class="artigo-titulo">
-    Nosso <em>Artigo</em>
-  </h1>
-
-  <div class="artigo-rule"></div>
-
-  <p class="artigo-subtitulo">
-    Estamos finalizando o artigo sobre o processo de produção da Cerveja Morte Lenta. Em breve ele estará disponível.
+<!-- HERO -->
+<section class="artigo-hero">
+  <div class="hero-eyebrow">Engenharia da Computação · Centro Universitário SENAC São Paulo · 2026</div>
+  <h1 class="hero-title">Morte Lenta: <em>Sistema IoT</em> de Monitoramento e Automação para Produção de Cerveja Artesanal</h1>
+  <div class="hero-rule"></div>
+  <p class="hero-subtitulo">
+    Uma solução de baixo custo para automação das fases críticas de brassagem e fermentação, integrando ESP32, LoRaWAN, n8n, InfluxDB e Grafana em uma arquitetura IoT de quatro camadas.
   </p>
+  <div class="hero-keywords">
+    <span class="kw">IoT</span>
+    <span class="kw">Cerveja Artesanal</span>
+    <span class="kw">Automação</span>
+    <span class="kw">ESP32</span>
+    <span class="kw">LoRaWAN</span>
+    <span class="kw">Cadeia de Suprimentos</span>
+  </div>
+</section>
 
-  <div class="artigo-badge">
-    <div class="artigo-badge-dot"></div>
-    Em elaboração — disponível em breve
+
+<!-- AUTORES -->
+<section class="autores-section">
+  <div class="autores-inner">
+    <div class="section-eyebrow">— Autores —</div>
+    <div class="autores-grid">
+      <div class="autor-card">
+        <div class="autor-nome">Kezia Soares</div>
+        <div class="autor-role">Líder de Projeto</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-nome">João Pedro Ferro e Silva</div>
+        <div class="autor-role">Projetista de Hardware</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-nome">Mikael Aurio Martins de Paula</div>
+        <div class="autor-role">Projetista de Prototipagem</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-nome">Lucas Rodrigues de Melo</div>
+        <div class="autor-role">Tech Writer</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-nome">Rafael Assis da Silva</div>
+        <div class="autor-role">Manufatura</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-nome">Rafael Sarain Assis da Silva</div>
+        <div class="autor-role">Desenvolvedor</div>
+      </div>
+    </div>
+    <div class="autores-ultima-linha">
+      <div class="autor-card">
+        <div class="autor-nome">Vitor Nery Araujo</div>
+        <div class="autor-role">Desenvolvedor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CORPO -->
+<main class="artigo-body">
+
+  <!-- RESUMO -->
+  <div class="resumo-block">
+    <div class="resumo-label">Resumo</div>
+    <p class="resumo-texto">
+      Este artigo apresenta o desenvolvimento do sistema de monitoramento e automação <strong>Morte Lenta</strong>, projetado para as fases críticas de brassagem e fermentação na produção de cerveja artesanal. A arquitetura IoT proposta integra o microcontrolador <strong>ESP32 Heltec WiFi LoRa 32 (V2)</strong>, sensores DS18B20 e DHT22, relé de estado sólido (SSR GSR2), protocolo LoRaWAN via The Things Network (TTN), automação n8n, banco de dados de séries temporais InfluxDB e dashboard Grafana. São abordados dois lotes: uma cerveja <strong>Pilsen Session</strong> e uma <strong>Sour de frutas vermelhas</strong>. O sistema implementa controle por histerese, armazenamento local resiliente com buffer LittleFS de 500 leituras e recuperação automática de estado via NVS após quedas de energia. Os resultados demonstram a viabilidade técnica e econômica da solução de baixo custo (R$ 660,00) para automação cervejeira artesanal no contexto da Indústria 4.0.
+    </p>
   </div>
 
-  <a href="index.html" class="artigo-back">
-    ← voltar para o site
-  </a>
-</div>
+  <div class="divider"></div>
 
+  <!-- 01 — INTRODUÇÃO -->
+  <section class="secao">
+    <div class="secao-num">— 01 —</div>
+    <h2 class="secao-titulo"><em>Introdução</em></h2>
+    <p>
+      O mercado cervejeiro nacional consolidou-se como o <strong>terceiro maior do mundo</strong>, com consumo anual de aproximadamente 15 bilhões de litros (BRASIL, 2025). O segmento artesanal ocupa entre 2% e 3% do mercado interno, e o Brasil já exporta cerca de 315 milhões de litros para 77 países. No World Beer Cup, o país conquistou cinco medalhas, superando nações tradicionais como Alemanha e Bélgica — com destaque para o estilo Catharina Sour (GLOBO RURAL, 2026).
+    </p>
+    <p>
+      Nesse cenário, a precisão no controle térmico durante brassagem e fermentação é fundamental: desvios de temperatura comprometem a conversão enzimática dos amidos e afetam diretamente o perfil organoléptico da bebida. O controle manual de rampas térmicas ainda representa um desafio real para cervejeiros artesanais — especialmente em produções de escala laboratorial, onde equipamentos industriais são economicamente inviáveis.
+    </p>
+    <p>
+      O presente trabalho descreve o projeto <strong>Morte Lenta</strong>, desenvolvido no Centro Universitário SENAC São Paulo. O sistema automatiza as fases de brassagem e fermentação de dois lotes — uma Pilsen puro malte e uma Sour de frutas vermelhas —, empregando o ESP32 com conectividade LoRaWAN integrada à TTN, plataforma n8n para processamento, InfluxDB para armazenamento e Grafana para visualização em tempo real.
+    </p>
+    <div class="subsecao">
+      <div class="subsecao-titulo">Objetivos Específicos</div>
+      <ol class="lista-artigo">
+        <li>Desenvolver controlador térmico por histerese;</li>
+        <li>Implementar pipeline de observabilidade com alertas via Telegram;</li>
+        <li>Garantir resiliência com buffer LittleFS de 500 leituras e recuperação via NVS/RTC RAM;</li>
+        <li>Integrar análise de cadeia de suprimentos com BOM e PMP;</li>
+        <li>Documentar as escolhas arquiteturais para subsidiar trabalhos futuros.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 02 — REFERENCIAL TEÓRICO -->
+  <section class="secao">
+    <div class="secao-num">— 02 —</div>
+    <h2 class="secao-titulo">Referencial <em>Teórico</em></h2>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">2.1 Controle On-Off com Histerese</div>
+      <p>
+        O controle on-off com histerese é a estratégia mais simples aplicável a sistemas de temperatura. O atuador é acionado quando a variável cai abaixo de um limiar inferior e desligado ao ultrapassar um limiar superior, definindo uma banda ΔT = T<sub>sup</sub> − T<sub>inf</sub> em torno do setpoint. Sua robustez e facilidade de implementação em microcontroladores de baixo custo são vantagens centrais. Para processos de brassagem, com precisão requerida de ± 1,5°C, essa característica é plenamente aceitável (DORF; BISHOP, 2013). No projeto, a histerese mantém 65°C na mostura por 60 minutos: o relé SSR GSR2 é acionado abaixo de 63,5°C e desligado acima de 66,5°C.
+      </p>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">2.2 ESP32 e Internet das Coisas (IoT)</div>
+      <p>
+        A Internet das Coisas (IoT) compreende o paradigma em que dispositivos físicos são dotados de processamento, sensoriamento e comunicação (ASHTON, 2009 apud OLIVEIRA; ZANETTI, 2020). O módulo <strong>Heltec WiFi LoRa 32 (V2)</strong> integra o ESP32 a um transceptor LoRa, display OLED e antena dedicada, combinando conectividade dual (LoRaWAN e Wi-Fi) em um único dispositivo compacto e acessível.
+      </p>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">2.3 Protocolo LoRaWAN e The Things Network</div>
+      <p>
+        LoRaWAN é um protocolo sem fio baseado na modulação LoRa (chirp spread spectrum), com alcances de 2 a 5 km em ambientes urbanos e acima de 15 km em área aberta (AUGUSTIN et al., 2016). A TTN oferece conectividade via autenticação OTAA e encaminha os pacotes, via webhook HTTP, diretamente ao servidor n8n.
+      </p>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">2.4 Processo de Brassagem Cervejeira</div>
+      <div class="fases-grid">
+        <div class="fase-item">
+          <div class="fase-titulo">Preparo e Higienização</div>
+          <div class="fase-tempo">30 min</div>
+          <div class="fase-desc">Sanitização de todos os equipamentos com solução iodofórica.</div>
+        </div>
+        <div class="fase-item">
+          <div class="fase-titulo">Pré-aquecimento</div>
+          <div class="fase-tempo">15 min · 70°C</div>
+          <div class="fase-desc">Aquecimento da água de mostura, monitorado pelo DS18B20.</div>
+        </div>
+        <div class="fase-item">
+          <div class="fase-titulo">Mostura</div>
+          <div class="fase-tempo">60 min · 65°C</div>
+          <div class="fase-desc">Repouso enzimático: amilases α e β convertem amidos em açúcares fermentáveis.</div>
+        </div>
+        <div class="fase-item">
+          <div class="fase-titulo">Mash Out</div>
+          <div class="fase-tempo">15 min · 76°C</div>
+          <div class="fase-desc">Inativação enzimática e redução da viscosidade do mosto.</div>
+        </div>
+        <div class="fase-item">
+          <div class="fase-titulo">Fervura</div>
+          <div class="fase-tempo">60 min · 100°C</div>
+          <div class="fase-desc">Esterilização do mosto e isomerização dos alfa-ácidos do lúpulo.</div>
+        </div>
+        <div class="fase-item">
+          <div class="fase-titulo">Fermentação</div>
+          <div class="fase-tempo">10 dias · 18°C</div>
+          <div class="fase-desc">Inoculação de Saccharomyces cerevisiae, regulada pelo Relé 2.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">2.5 InfluxDB e Pipeline n8n</div>
+      <p>
+        O <strong>InfluxDB</strong> é um banco de dados orientado a séries temporais, otimizado para dados de sensores IoT. No projeto, armazena temperatura, umidade, estados dos relés e transições de fase com política de expurgo em três níveis: dados brutos por 30 dias, médias horárias por 1 ano e exclusão definitiva após 365 dias.
+      </p>
+      <p>
+        O <strong>n8n</strong> atua como orquestrador central: recebe dados via webhook da TTN, valida informações, detecta mudanças de fase, persiste no InfluxDB, espelha no Google Sheets e dispara alertas via Telegram em eventos críticos como transições de fase, temperatura fora da faixa ou falha de sensor.
+      </p>
+    </div>
+  </section>
+
+  <!-- 03 — METODOLOGIA -->
+  <section class="secao">
+    <div class="secao-num">— 03 —</div>
+    <h2 class="secao-titulo"><em>Metodologia</em></h2>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">3.1 Arquitetura do Sistema</div>
+      <p>O sistema Morte Lenta é organizado em quatro camadas funcionais: dispositivo, rede, processamento e persistência, e apresentação com alertas. O fluxo de telemetria segue a cadeia:</p>
+      <div class="arq-flow">
+        <div class="arq-node">ESP32<br><small style="color:var(--cinza-fraco);font-size:0.7em;">Dispositivo</small></div>
+        <div class="arq-arrow">→</div>
+        <div class="arq-node">LoRaWAN<br><small style="color:var(--cinza-fraco);font-size:0.7em;">TTN</small></div>
+        <div class="arq-arrow">→</div>
+        <div class="arq-node">n8n<br><small style="color:var(--cinza-fraco);font-size:0.7em;">Processamento</small></div>
+        <div class="arq-arrow">→</div>
+        <div class="arq-node">InfluxDB<br><small style="color:var(--cinza-fraco);font-size:0.7em;">Persistência</small></div>
+        <div class="arq-arrow">→</div>
+        <div class="arq-node">Grafana<br><small style="color:var(--cinza-fraco);font-size:0.7em;">Dashboard</small></div>
+        <div class="arq-arrow">+</div>
+        <div class="arq-node">Telegram<br><small style="color:var(--cinza-fraco);font-size:0.7em;">Alertas</small></div>
+      </div>
+
+      <!-- FIGURA 1 — Diagrama -->
+      <div class="figura-bloco figura-larga" style="margin-top:2rem;">
+        <img src="../Imagens/diagrama_ml.png" alt="Figura 1 — Arquitetura do sistema Morte Lenta">
+        <div class="figura-caption">Figura 1 — Arquitetura completa do sistema Morte Lenta</div>
+        <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+      </div>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">3.2 Hardware: Dispositivo Portátil</div>
+      <ul class="lista-artigo">
+        <li><strong>Microcontrolador:</strong> Módulo Heltec WiFi LoRa 32 (V2) com ESP32, display OLED e transceptor LoRa SX1276;</li>
+        <li><strong>Sensores de temperatura:</strong> DS18B20 (One-Wire, precisão ± 0,5°C, faixa -55 a +125°C);</li>
+        <li><strong>Sensor ambiental:</strong> DHT22 (temperatura e umidade, precisão ± 0,5°C e ± 2% UR);</li>
+        <li><strong>Atuadores:</strong> Relé de Estado Sólido GSR2 (SSR) para fogão elétrico (Fase 1) e climatizador (Fase 2);</li>
+        <li><strong>IHM:</strong> Display OLED com push-buttons para navegação e validação local;</li>
+        <li><strong>Invólucro:</strong> Case azul impressa em 3D com antena LoRa externa e push-buttons frontais;</li>
+        <li><strong>Conectividade:</strong> LoRaWAN via TTN (modo primário) e Wi-Fi 2.4 GHz HTTP/MQTT (modo secundário).</li>
+      </ul>
+
+      <!-- FIGURAS 2 e 3 — protoboard e case — lado a lado -->
+      <div class="figuras-duplas">
+        <div class="figura-bloco">
+          <img src="../Imagens/prototipocir_ml.png" alt="Figura 2 — ESP32 na protoboard">
+          <div class="figura-caption">Figura 2 — ESP32 Heltec WiFi LoRa 32 (V2) na protoboard</div>
+          <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+        </div>
+        <div class="figura-bloco">
+          <img src="../Imagens/projeto.png" alt="Figura 3 — Dispositivo finalizado em case azul 3D">
+          <div class="figura-caption">Figura 3 — Dispositivo Morte Lenta finalizado em case azul impressa em 3D</div>
+          <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">3.3 Firmware: Lógica de Controle e Resiliência</div>
+      <p>O firmware foi desenvolvido em <strong>C/C++ na Arduino IDE</strong>. O algoritmo de histerese determina o acionamento do SSR GSR2 por fase:</p>
+      <ul class="lista-artigo">
+        <li><strong>Fase 1 — Mostura (setpoint 65°C):</strong> relé acionado em 63°C, desligado em 67°C;</li>
+        <li><strong>Fase 2 — Fermentação (setpoint 18°C):</strong> relé ativado em 17°C, desligado em 19°C;</li>
+        <li><strong>Buffer local LittleFS:</strong> armazena até 500 leituras (~4h) em caso de perda de conectividade, com envio burst após reconexão;</li>
+        <li><strong>Reconexão automática:</strong> retry crescente (30s nas 5 primeiras tentativas; 5min nas seguintes);</li>
+        <li><strong>Validação de sanidade:</strong> descarta leituras com T &gt; 110°C ou T &lt; -10°C e reinicia sensor em caso de retorno NaN;</li>
+        <li><strong>Recuperação de estado:</strong> fase persistida em RTC RAM e NVS; restaurada automaticamente após queda de energia.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 — PROCESSO PRODUTIVO -->
+  <section class="secao">
+    <div class="secao-num">— 04 —</div>
+    <h2 class="secao-titulo">Processo <em>Produtivo</em></h2>
+
+    <!-- FIGURA 6 — Equipe -->
+    <div class="figura-bloco figura-larga">
+      <img src="../Imagens/fazendo_cerveja.png" alt="Figura 6 — Equipe durante o processo de produção dos lotes">
+      <div class="figura-caption">Figura 6 — Equipe durante o processo de produção dos lotes</div>
+      <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+    </div>
+
+    <div class="subsecao" style="margin-top:2.5rem;">
+      <div class="subsecao-titulo">4.1 Lote 1: Cerveja Pilsen Session (5 Litros)</div>
+      <p>A Pilsen Session Morte Lenta foi desenvolvida com grist de <strong>675g de Malte Pilsen</strong> e <strong>75g de Malte Chateau Munich</strong>. As etapas seguiram o protocolo automatizado:</p>
+      <ul class="lista-artigo">
+        <li><strong>Preparo e higienização (30 min):</strong> sanitização com solução iodofórica;</li>
+        <li><strong>Pré-aquecimento (15 min, 70°C):</strong> monitorado pelo DS18B20 e controlado pelo ESP32 via relé SSR;</li>
+        <li><strong>Mostura (60 min, 65°C):</strong> histerese automática com desvio médio registrado de ± 1,2°C;</li>
+        <li><strong>Mash out e clarificação (15 min, 76°C):</strong> sparge com 4 litros de água, volume pré-fervura de ~8 litros;</li>
+        <li><strong>Fervura (60 min, 100°C):</strong> adição de 2,5g de Nugget (t=0) e 2,5g de Brewer's Gold (t=50 min);</li>
+        <li><strong>Fermentação e envase (10 dias, 18°C):</strong> levedura Ale, controle via Relé 2, priming 6,5 g/L.</li>
+      </ul>
+
+      <!-- FIGURAS 4 e 5 — serpentina e fervura — lado a lado -->
+      <div class="figuras-duplas">
+        <div class="figura-bloco">
+          <img src="../Imagens/serpentina.png" alt="Figura 4 — Serpentina de resfriamento do mosto pós-fervura">
+          <div class="figura-caption">Figura 4 — Serpentina de resfriamento do mosto pós-fervura</div>
+          <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+        </div>
+        <div class="figura-bloco">
+          <img src="../Imagens/cozimentocerveja.png" alt="Figura 5 — Etapa de fervura do mosto com adição de lúpulo">
+          <div class="figura-caption">Figura 5 — Etapa de fervura do mosto com adição de lúpulo</div>
+          <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">4.2 Lote 2: Cerveja Sour de Frutas Vermelhas</div>
+      <p>O segundo lote consistiu em uma cerveja <strong>Fruit Sour com amora, morango e raspas de limão</strong>. Diferenciações em relação ao Lote 1:</p>
+      <ul class="lista-artigo">
+        <li><strong>Preparação das frutas:</strong> morango e amora amassados, combinados com raspas de limão e higienizados antes da adição ao fermentador;</li>
+        <li><strong>Adição de adjuntos:</strong> frutas processadas como purê pasteurizado, inseridas após atenuação da fermentação primária;</li>
+        <li><strong>Fermentação secundária:</strong> 7 dias adicionais a 18°C com gestão autônoma do climatizador via ESP32.</li>
+      </ul>
+
+      <!-- FIGURA 7 — Envase -->
+      <div class="figura-bloco figura-retrato">
+        <img src="../Imagens/envase.png" alt="Figura 7 — Envase da cerveja Morte Lenta após maturação">
+        <div class="figura-caption">Figura 7 — Envase da cerveja Morte Lenta após maturação</div>
+        <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — CADEIA DE SUPRIMENTOS -->
+  <section class="secao">
+    <div class="secao-num">— 05 —</div>
+    <h2 class="secao-titulo">Cadeia de Suprimentos e <em>Planejamento</em></h2>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">5.1 Árvore do Produto (BOM) — Lote Industrial 33.000 L</div>
+      <p>A árvore do produto está segmentada em três níveis:</p>
+      <ul class="lista-artigo">
+        <li><strong>Nível 0 — Produto Acabado:</strong> cerveja finalizada (33.000 L);</li>
+        <li><strong>Nível 1 — Subconjuntos:</strong> Líquido (cerveja fermentada), Kit de Envase e Logística;</li>
+        <li><strong>Nível 2 — Matérias-primas:</strong> água, malte Pilsen e Munich, lúpulos Nugget e Brewer's Gold, levedura Ale, garrafas 600 mL, tampas pry-off, rótulos, caixas, pallets PBR e filme stretch.</li>
+      </ul>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">5.2 Necessidade de Materiais (MRP)</div>
+      <div class="tabela-wrapper">
+        <div class="tabela-caption">Tabela 1 — Necessidade de materiais para lote industrial de 33.000 litros</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th>Material / Insumo</th>
+              <th>Ref./Litro</th>
+              <th>Total Necessário</th>
+              <th>Unidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Líquido</td><td>Água Cervejeira</td><td>5,0 L</td><td>165.000</td><td>Litros</td></tr>
+            <tr><td>Líquido</td><td>Malte (Base/Especial)</td><td>0,20 kg</td><td>6.600</td><td>kg</td></tr>
+            <tr><td>Líquido</td><td>Lúpulo</td><td>2,5 g</td><td>82,5</td><td>kg</td></tr>
+            <tr><td>Líquido</td><td>Levedura</td><td>0,5 g</td><td>16,5</td><td>kg</td></tr>
+            <tr><td>Envase</td><td>Garrafas de Vidro (600 mL)</td><td>≈ 1,67 un</td><td>55.000</td><td>Unidades</td></tr>
+            <tr><td>Envase</td><td>Tampas Metálicas</td><td>≈ 1,67 un</td><td>55.000</td><td>Unidades</td></tr>
+            <tr><td>Envase</td><td>Rótulos</td><td>≈ 1,67 un</td><td>55.000</td><td>Unidades</td></tr>
+            <tr><td>Logística</td><td>Engradados (p/ 12 un.)</td><td>—</td><td>4.584</td><td>Unidades</td></tr>
+            <tr><td>Logística</td><td>Pallets (p/ 40 engr.)</td><td>—</td><td>115</td><td>Unidades</td></tr>
+            <tr><td>Logística</td><td>Filme Stretch</td><td>1 rolo / 10 pal.</td><td>12</td><td>Rolos</td></tr>
+          </tbody>
+        </table>
+        <div class="tabela-fonte">Fonte: Elaborado por Lucas Rodrigues de Melo (2026)</div>
+      </div>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">5.3 Plano Mestre de Produção (PMP)</div>
+      <p>O PMP foi estruturado em duas estratégias para horizonte de 9 semanas, com estoque inicial de 3.300 litros (10% do lote mestre).</p>
+      <div class="tabela-wrapper">
+        <div class="tabela-caption">Tabela 2 — PMP Estratégia 1: Acompanhando a Demanda (Chase)</div>
+        <table>
+          <thead>
+            <tr><th>Variável</th><th>S0</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th><th>S6</th><th>S7</th><th>S8</th><th>S9</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Demanda (L)</td><td>—</td><td>1.980</td><td>1.980</td><td>3.300</td><td>3.300</td><td>3.960</td><td>3.960</td><td>4.620</td><td>4.620</td><td>5.280</td></tr>
+            <tr><td>PMP (L)</td><td>—</td><td>0</td><td>660</td><td>3.300</td><td>3.300</td><td>3.960</td><td>3.960</td><td>4.620</td><td>4.620</td><td>5.280</td></tr>
+            <tr><td>Estoque (L)</td><td>3.300</td><td>1.320</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          </tbody>
+        </table>
+        <div class="tabela-fonte">Fonte: Lucas Rodrigues de Melo (2026)</div>
+      </div>
+      <p>A <strong>Estratégia 2 (Nivelado)</strong> adota volume constante de 3.300 L/semana ao longo de todo o horizonte, com estoque médio de 4.092 litros e pico máximo de 5.940 litros — adequada para operações com capacidade produtiva estável.</p>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">5.4 Viabilidade Financeira</div>
+      <div class="destaque-grid">
+        <div class="destaque-card">
+          <div class="destaque-val">R$<span>4,50</span></div>
+          <div class="destaque-desc">Custo variável / garrafa</div>
+        </div>
+        <div class="destaque-card">
+          <div class="destaque-val">R$<span>8,50</span></div>
+          <div class="destaque-desc">Preço de venda / garrafa</div>
+        </div>
+        <div class="destaque-card">
+          <div class="destaque-val">30<span>k</span></div>
+          <div class="destaque-desc">Ponto de equilíbrio (garrafas)</div>
+        </div>
+        <div class="destaque-card">
+          <div class="destaque-val">R$<span>467k</span></div>
+          <div class="destaque-desc">Faturamento bruto potencial</div>
+        </div>
+      </div>
+      <p>Fornecedores estratégicos: <strong>Mineração Juniú</strong> (água — Dracena/SP); <strong>Braskem</strong> (resinas PEAD); <strong>Cooperativa Agrária</strong> (malte e lúpulo); <strong>Owens Illinois</strong> (garrafas âmbar 600 mL); <strong>Klabin</strong> (caixas e pallets). Distribuição via Bebidas Santo Amaro, Assaí Atacadista e varejo especializado da Zona Sul de São Paulo.</p>
+    </div>
+  </section>
+
+  <!-- 06 — RESULTADOS -->
+  <section class="secao">
+    <div class="secao-num">— 06 —</div>
+    <h2 class="secao-titulo">Resultados e <em>Discussão</em></h2>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">6.1 Análise da Curva Térmica</div>
+      <p>
+        O sistema de histerese demonstrou alta confiabilidade: durante a mostura (65°C por 60 min), o desvio médio foi de apenas <strong>± 1,2°C</strong>, dentro da faixa de tolerância enzimática (63°C a 68°C). O SSR GSR2 mitigou chattering e as transições entre fases ocorreram dentro dos tempos previstos. A latência média da cadeia ESP32–LoRaWAN–Grafana ficou abaixo de <strong>5 segundos</strong>.
+      </p>
+      <p>
+        O processo de cozimento do Lote 2 apresentou duração total de <strong>363,7 minutos (~6 horas)</strong>, com tempo de aquecimento ativo de 130 minutos e consumo energético de <strong>4,33 kWh</strong> com resistência de 2.000W — resultado excelente para um sistema de pequeno porte.
+      </p>
+
+      <!-- FIGURA 8 — Dashboard Grafana -->
+      <div class="figura-bloco figura-larga">
+        <img src="../Imagens/processo_de_cozimento.png" alt="Figura 8 — Dashboard Grafana: curva térmica real do processo de cozimento (Lote 2)">
+        <div class="figura-caption">Figura 8 — Dashboard Grafana: curva térmica real do processo de cozimento (Lote 2)</div>
+        <div class="figura-fonte">Fonte: Equipe Morte Lenta (2026)</div>
+      </div>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">6.2 Resiliência e Pipeline IoT</div>
+      <p>
+        Em testes com interrupção de 45 minutos, o buffer LittleFS armazenou todas as leituras sem nenhuma perda de dados (<strong>zero data loss</strong>). O envio burst pós-reconexão foi perfeitamente sincronizado. O DS18B20 manteve precisão de ± 0,5°C ao longo de processos de longa duração. A cadeia n8n → InfluxDB sustentou alta disponibilidade durante todas as fases de brassagem e os 10 dias de maturação.
+      </p>
+    </div>
+
+    <div class="subsecao">
+      <div class="subsecao-titulo">6.3 Custos e Viabilidade do Protótipo</div>
+      <p>O investimento total foi de <strong>R$ 660,00</strong> (R$ 94,28 por membro da equipe), com 70 horas de dedicação técnica ao longo de 15 semanas.</p>
+      <div class="tabela-wrapper">
+        <div class="tabela-caption">Tabela 3 — Resumo de investimentos do protótipo</div>
+        <table>
+          <thead>
+            <tr><th>Nº</th><th>Categoria</th><th>Itens</th><th>Participação</th><th>Subtotal</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>01</td><td>Circuito (hardware eletrônico)</td><td>6</td><td>57%</td><td>R$ 380,00</td></tr>
+            <tr><td>02</td><td>Componentes (periféricos)</td><td>4</td><td>15%</td><td>R$ 100,00</td></tr>
+            <tr><td>03</td><td>Insumos (ingredientes)</td><td>7</td><td>27%</td><td>R$ 180,00</td></tr>
+            <tr><td colspan="4" style="text-align:right;color:var(--branco);font-weight:600;letter-spacing:0.05em;">Total Geral</td><td style="color:var(--vermelho);font-weight:600;">R$ 660,00</td></tr>
+          </tbody>
+        </table>
+        <div class="tabela-fonte">Fonte: Lucas Rodrigues de Melo (2026)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 — CONCLUSÃO -->
+  <section class="secao">
+    <div class="secao-num">— 07 —</div>
+    <h2 class="secao-titulo"><em>Conclusão</em></h2>
+    <div class="conclusao-box">
+      <p>
+        O projeto Morte Lenta demonstrou que é possível construir um sistema IoT robusto, de baixo custo e totalmente funcional para automação de cerveja artesanal — sem abrir mão de observabilidade em tempo real, resiliência offline e rastreabilidade completa do processo.
+      </p>
+    </div>
+    <ul class="lista-artigo" style="margin-top:1.6rem;">
+      <li>Controle térmico por histerese com desvio médio de <strong>± 1,2°C</strong> em processos de 363,7 minutos;</li>
+      <li>Consumo energético medido de <strong>4,33 kWh</strong> com 130 minutos de aquecimento ativo;</li>
+      <li>Observabilidade com latência inferior a <strong>5 segundos</strong> ponta a ponta;</li>
+      <li>Resiliência offline com <strong>buffer de 500 leituras</strong> e zero data loss em testes de 45 min;</li>
+      <li>Produção bem-sucedida de <strong>dois lotes</strong> com qualidade sensorial validada.</li>
+    </ul>
+    <p style="margin-top:1.6rem;">
+      A integração com a cadeia de suprimentos revelou que, em escala industrial de 33.000 litros, o sistema contribui diretamente para mitigar retrabalhos e perdas por falhas de controle térmico — impactando a margem de R$ 4,00/garrafa e o ponto de equilíbrio de 30.000 unidades.
+    </p>
+    <p>
+      Para trabalhos futuros, recomenda-se a implementação de <strong>controle PID</strong> em substituição à histerese e a incorporação de <strong>sensores de densidade</strong> para medição da atenuação do mosto em tempo real, avançando rumo a um sistema totalmente autônomo de brassagem.
+    </p>
+  </section>
+
+  <!-- REFERÊNCIAS -->
+  <section class="secao">
+    <div class="secao-num">— Referências Bibliográficas —</div>
+    <h2 class="secao-titulo" style="margin-bottom:1.5rem;">Referências</h2>
+    <ul class="refs-list">
+      <li>ALVES, A. <em>Planejamento e gestão de projetos.</em> São Paulo: Editora SENAC, 2018.</li>
+      <li>AUGUSTIN, A. et al. A Study of LoRa: Long Range and Low Power Networks for the Internet of Things. <em>Sensors,</em> v. 16, n. 9, p. 1466, 2016.</li>
+      <li>BRASIL. Ministério da Agricultura e Pecuária (MAPA). <em>Anuário da Cerveja 2025.</em> Brasília: MAPA, 2025.</li>
+      <li>DORF, R. C.; BISHOP, R. H. <em>Sistemas de Controle Modernos.</em> 12. ed. Rio de Janeiro: LTC, 2013.</li>
+      <li>FRANKLIN, G. F.; POWELL, J. D.; EMAMI-NAEINI, A. <em>Sistemas de controle para engenharia.</em> 6. ed. Porto Alegre: Bookman, 2013.</li>
+      <li>FREITAS, S. et al. <em>Básico em produção de cervejas artesanais.</em> São Paulo: Editora SENAC, 2020.</li>
+      <li>GLOBO RURAL. Brasil tem cinco cervejas entre as melhores do mundo. <em>Globo Rural,</em> 20 maio 2026.</li>
+      <li>INFLUXDATA. <em>InfluxDB Documentation: Retention Policies and Continuous Queries.</em> Disponível em: https://docs.influxdata.com. Acesso em: 2023.</li>
+      <li>MAXIM INTEGRATED. <em>DS18B20: Programmable Resolution 1-Wire Digital Thermometer.</em> Datasheet, 2019.</li>
+      <li>OLIVEIRA, C. L. V.; ZANETTI, H. A. P. <em>Projetos com Python e Arduino: IoT.</em> São Paulo: Editora Érica, 2020.</li>
+      <li>PALMER, J. J. <em>How to Brew.</em> Boulder: Brewers Publications, 2017.</li>
+      <li>SILVA, R. A.; JUNIOR, S. L. S. <em>Automação e Instrumentação Industrial com Arduino.</em> São Paulo: Saraiva, 2015.</li>
+      <li>WARREN, J. D.; ADAMS, J.; MOLLE, H. <em>Arduino para robótica.</em> 1. ed. São Paulo: Blucher, 2019.</li>
+    </ul>
+  </section>
+
+  <div style="text-align:center;">
+    <a href="index.html" class="btn-voltar">← voltar para o site</a>
+  </div>
+
+</main>
 </body>
 </html>
