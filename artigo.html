@@ -35,14 +35,19 @@
     z-index: 100;
     background: rgba(10,10,10,0.97);
     border-bottom: 1px solid var(--borda);
+    transform: none !important;
+    opacity: 1 !important;
   }
   .header-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 3rem;
+    height: auto !important;
   }
-  .header-logo img { height: 52px; }
+  .header-logo img { height: 52px !important; }
+  .header-left, .header-right { display: flex !important; flex: 1; align-items: center; }
+  .header-right { justify-content: flex-end; }
   .header-left a, .header-right a {
     font-family: 'Cinzel', serif;
     font-size: 0.6rem;
@@ -59,7 +64,11 @@
     gap: 2.5rem;
     padding: 0.6rem 3rem;
     border-top: 1px solid var(--borda);
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+  nav::-webkit-scrollbar { display: none; }
   nav a {
     font-family: 'Cinzel', serif;
     font-size: 0.62rem;
@@ -68,6 +77,9 @@
     color: var(--cinza-fraco);
     text-decoration: none;
     transition: color 0.2s;
+    white-space: nowrap;
+    padding: 0.4rem 0;
+    border-bottom: none !important;
   }
   nav a:hover, nav a.active { color: var(--vermelho); }
 
@@ -522,44 +534,13 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    /* Header */
-    .header-top { padding: 0.6rem 1rem; }
-    .header-logo img { height: 36px; }
-    .header-right { display: none; }
-    .header-left a { font-size: 0.52rem; }
-
-    /* Nav scrollável horizontal */
-    nav {
-      gap: 0;
-      padding: 0;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-      display: flex;
-      justify-content: flex-start;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    nav::-webkit-scrollbar { display: none; }
-    nav a {
-      font-size: 0.5rem;
-      letter-spacing: 0.15em;
-      padding: 0.55rem 0.9rem;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    /* Hero */
-    .artigo-hero {
-      padding: 115px 1rem 2.5rem;
-      min-height: auto;
-    }
-    .hero-eyebrow { font-size: 0.5rem; letter-spacing: 0.2em; margin-bottom: 1rem; }
-    .hero-title { font-size: clamp(0.9rem, 4.5vw, 1.3rem); line-height: 1.3; }
-    .hero-rule { margin: 1.2rem auto; }
-    .hero-subtitulo { font-size: 0.92rem; margin-bottom: 1.5rem; }
-    .hero-keywords { gap: 0.35rem; }
-    .kw { font-size: 0.48rem; padding: 0.28rem 0.6rem; }
+    /* Hero — padding suficiente para o header do site (150px mobile) */
+    .artigo-hero { padding: 165px 1rem 2.5rem; min-height: auto; }
+    .hero-eyebrow { font-size: 0.5rem; letter-spacing: 0.18em; margin-bottom: 0.8rem; }
+    .hero-title { font-size: clamp(0.9rem, 4.5vw, 1.2rem); }
+    .hero-rule { margin: 1rem auto; }
+    .hero-subtitulo { font-size: 0.9rem; margin-bottom: 1.2rem; }
+    .kw { font-size: 0.46rem; padding: 0.25rem 0.55rem; }
 
     /* Autores */
     .autores-section { padding: 1.8rem 0.8rem; }
@@ -576,41 +557,24 @@
     p { font-size: 0.98rem; }
     .secao-titulo { font-size: 1rem; }
     .subsecao-titulo { font-size: 0.75rem; }
-
-    /* Fases */
     .fases-grid { grid-template-columns: 1fr; }
-
-    /* Figuras */
     .figuras-duplas { grid-template-columns: 1fr; }
     .figuras-duplas .figura-bloco img { height: 220px; }
     .figura-bloco.figura-retrato img { max-width: 100%; }
-
-    /* Destaques */
     .destaque-grid { grid-template-columns: 1fr 1fr; }
     .destaque-val { font-size: 1.3rem; }
-    .destaque-desc { font-size: 0.5rem; }
-
-    /* Tabelas */
-    .tabela-wrapper { margin: 1.5rem -0.5rem; }
+    .tabela-wrapper { margin: 1.5rem -0.2rem; }
     table { font-size: 0.7rem; }
     thead th, tbody td { padding: 0.45rem 0.5rem; }
-
-    /* Outros */
     .conclusao-box { padding: 1.2rem; }
     .arq-flow { flex-direction: column; align-items: center; }
     .arq-arrow { transform: rotate(90deg); }
   }
 
-  @media (max-width: 400px) {
-    .header-top { padding: 0.5rem 0.8rem; }
-    .header-logo img { height: 30px; }
-    nav a { font-size: 0.46rem; padding: 0.5rem 0.7rem; }
-    .artigo-hero { padding: 105px 0.8rem 2rem; }
-    .hero-title { font-size: clamp(0.85rem, 5vw, 1.1rem); }
-    .autores-grid { grid-template-columns: 1fr 1fr; }
-    .autores-ultima-linha .autor-card { width: 50%; }
+  @media (max-width: 480px) {
+    .artigo-hero { padding: 175px 0.8rem 2rem; }
+    .hero-title { font-size: clamp(0.85rem, 5vw, 1.05rem); }
     .autor-avatar { width: 90px; height: 105px; border-radius: 6px; }
-    .destaque-grid { grid-template-columns: 1fr 1fr; }
     .artigo-body { padding: 1.5rem 0.8rem 3rem; }
   }
 </style>
@@ -642,12 +606,13 @@
 
 
 <!-- HERO -->
-<section class="artigo-hero">
+<section class="artigo-hero" id="artigo-hero-section">
   <div class="hero-eyebrow">Engenharia da Computação · Centro Universitário SENAC São Paulo · 2026</div>
-  <h1 class="hero-title">Morte Lenta: <em>Sistema IoT</em> de Monitoramento e Automação</h1>
+  <h1 class="hero-title">Morte Lenta: <em>Sistema IoT</em> de Monitoramento e Automação para Produção de Cerveja Artesanal</h1>
   <div class="hero-rule"></div>
   <p class="hero-subtitulo">
-Solução IoT de baixo custo para monitoramento e automação da produção de cerveja artesanal.  </p>
+    Uma solução de baixo custo para automação das fases críticas de brassagem e fermentação, integrando ESP32, LoRaWAN, n8n, InfluxDB e Grafana em uma arquitetura IoT de quatro camadas.
+  </p>
   <div class="hero-keywords">
     <span class="kw">IoT</span>
     <span class="kw">Cerveja Artesanal</span>
@@ -662,7 +627,7 @@ Solução IoT de baixo custo para monitoramento e automação da produção de c
 <!-- AUTORES -->
 <section class="autores-section">
   <div class="autores-inner">
-    <div class="section-eyebrow">— Membros —</div>
+    <div class="section-eyebrow">— Autores —</div>
     <div class="autores-grid">
       <div class="autor-card">
         <img class="autor-avatar" src="Imagens/Kezia.png" alt="Kezia Soares">
@@ -672,7 +637,7 @@ Solução IoT de baixo custo para monitoramento e automação da produção de c
       <div class="autor-card">
         <img class="autor-avatar" src="Imagens/João.png" alt="João Pedro Ferro e Silva">
         <div class="autor-nome">João Pedro Ferro e Silva</div>
-        <div class="autor-role">Projetista de Hardware/Desenvolvimento</div>
+        <div class="autor-role">Projetista de Hardware</div>
       </div>
       <div class="autor-card">
         <img class="autor-avatar" src="Imagens/Mike.png" alt="Mikael Aurio Martins de Paula">
@@ -1135,5 +1100,26 @@ Solução IoT de baixo custo para monitoramento e automação da produção de c
   </div>
 
 </main>
+<script>
+(function() {
+  const header = document.querySelector('header');
+  const hero = document.getElementById('artigo-hero-section');
+  if (!header || !hero) return;
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        header.style.transform = 'translateY(0)';
+        header.style.opacity = '1';
+      } else {
+        header.style.transform = 'translateY(-100%)';
+        header.style.opacity = '0';
+      }
+    });
+  }, { threshold: 0.05 });
+
+  obs.observe(hero);
+})();
+</script>
 </body>
 </html>
