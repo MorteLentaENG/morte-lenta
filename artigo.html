@@ -35,19 +35,24 @@
     z-index: 100;
     background: rgba(10,10,10,0.97);
     border-bottom: 1px solid var(--borda);
-    transform: none !important;
-    opacity: 1 !important;
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s ease, opacity 0.4s ease;
   }
   .header-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.9rem 3rem;
-    height: auto !important;
+    padding: 0 2.5rem;
+    height: 80px;
   }
-  .header-logo img { height: 52px !important; }
-  .header-left, .header-right { display: flex !important; flex: 1; align-items: center; }
+  .header-left, .header-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
   .header-right { justify-content: flex-end; }
+  .header-logo { text-align: center; flex: 0 0 auto; }
+  .header-logo img { height: 52px; width: auto; object-fit: contain; display: block; }
   .header-left a, .header-right a {
     font-family: 'Cinzel', serif;
     font-size: 0.6rem;
@@ -59,12 +64,12 @@
   }
   .header-left a:hover, .header-right a:hover { color: var(--vermelho); }
   nav {
+    background: #0d0d0d;
+    border-top: 1px solid rgba(255,255,255,0.04);
     display: flex;
     justify-content: center;
-    gap: 2.5rem;
-    padding: 0.6rem 3rem;
-    border-top: 1px solid var(--borda);
-    flex-wrap: nowrap !important;
+    gap: 2rem;
+    padding: 0.6rem 2rem;
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -72,16 +77,17 @@
   nav a {
     font-family: 'Cinzel', serif;
     font-size: 0.62rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--cinza-fraco);
+    color: rgba(245,240,232,0.5);
     text-decoration: none;
     transition: color 0.2s;
     white-space: nowrap;
-    padding: 0.4rem 0;
-    border-bottom: none !important;
+    flex-shrink: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.3rem 0;
   }
-  nav a:hover, nav a.active { color: var(--vermelho); }
+  nav a:hover, nav a.active { color: var(--vermelho); border-bottom-color: var(--vermelho); }
 
   /* ── HERO ── */
   .artigo-hero {
@@ -534,15 +540,19 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    /* Hero — padding suficiente para o header do site (150px mobile) */
-    .artigo-hero { padding: 165px 1rem 2.5rem; min-height: auto; }
+    .header-top { padding: 0 1rem; height: 56px; }
+    .header-logo img { height: 36px; }
+    .header-right { display: none; }
+    nav { gap: 0; padding: 0; justify-content: flex-start; }
+    nav a { font-size: 0.5rem; letter-spacing: 0.1em; padding: 0.5rem 0.75rem 0.4rem; }
+
+    .artigo-hero { padding: 100px 1rem 2.5rem; min-height: auto; }
     .hero-eyebrow { font-size: 0.5rem; letter-spacing: 0.18em; margin-bottom: 0.8rem; }
     .hero-title { font-size: clamp(0.9rem, 4.5vw, 1.2rem); }
     .hero-rule { margin: 1rem auto; }
     .hero-subtitulo { font-size: 0.9rem; margin-bottom: 1.2rem; }
     .kw { font-size: 0.46rem; padding: 0.25rem 0.55rem; }
 
-    /* Autores */
     .autores-section { padding: 1.8rem 0.8rem; }
     .autores-grid { grid-template-columns: 1fr 1fr; }
     .autores-ultima-linha .autor-card { width: 50%; }
@@ -550,7 +560,6 @@
     .autor-nome { font-size: 0.6rem; }
     .autor-role { font-size: 0.55rem; }
 
-    /* Corpo */
     .artigo-body { padding: 2rem 1rem 4rem; }
     .resumo-block { padding: 1.2rem; }
     .resumo-texto { font-size: 0.96rem; }
@@ -563,8 +572,8 @@
     .figura-bloco.figura-retrato img { max-width: 100%; }
     .destaque-grid { grid-template-columns: 1fr 1fr; }
     .destaque-val { font-size: 1.3rem; }
-    .tabela-wrapper { margin: 1.5rem -0.2rem; }
-    table { font-size: 0.7rem; }
+    .tabela-wrapper { margin: 1.5rem 0; overflow-x: auto; }
+    table { font-size: 0.7rem; min-width: 500px; }
     thead th, tbody td { padding: 0.45rem 0.5rem; }
     .conclusao-box { padding: 1.2rem; }
     .arq-flow { flex-direction: column; align-items: center; }
@@ -572,7 +581,10 @@
   }
 
   @media (max-width: 480px) {
-    .artigo-hero { padding: 175px 0.8rem 2rem; }
+    .header-top { height: 50px; }
+    .header-logo img { height: 30px; }
+    nav a { font-size: 0.45rem; padding: 0.45rem 0.6rem; }
+    .artigo-hero { padding: 92px 0.8rem 2rem; }
     .hero-title { font-size: clamp(0.85rem, 5vw, 1.05rem); }
     .autor-avatar { width: 90px; height: 105px; border-radius: 6px; }
     .artigo-body { padding: 1.5rem 0.8rem 3rem; }
